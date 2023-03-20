@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  resources :issues
+  get 'issues/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  root 'home#index'
+  root 'issues#index'
 end
