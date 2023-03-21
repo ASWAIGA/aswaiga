@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+ h1 {
+  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+  color: #008aa8;
+  font-size: 1.4rem;
+  margin-block-end: 1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+ }
+
+.btn-success {
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  margin-left: 73.2rem;
+}
+
+.btn-success:hover {
+  background-color: #1d8fad;
+  color: #ffffff;
+  border-color: transparent;
+}
