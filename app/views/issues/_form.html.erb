@@ -11,37 +11,123 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :tipus, style: "display: block" %>
-    <%= form.text_field :tipus %>
-  </div>
+  <p style="color: green"><%= notice %></p>
 
-  <div>
-    <%= form.label :severity, style: "display: block" %>
-    <%= form.text_field :severity %>
-  </div>
+<div class="row no-gutters">
+<div class="col no-gutters">
+<div class= "leftside">
+  <header class= "newissue-cabecera-izquierda">
+    <header>
+      <h1>New issue</h1>
+    </header>
 
-  <div>
-    <%= form.label :priority, style: "display: block" %>
-    <%= form.text_field :priority %>
-  </div>
+    <div class= "subject-container">
+          <input type="text" class="tg-input-subject" placeholder="Add the subject you want">
+    </div>
 
-  <div>
-    <%= form.label :issue, style: "display: block" %>
-    <%= form.text_field :issue %>
-  </div>
+    <p></p>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+    <div class="tag issue">
+          <button class="btn-tag" id="tag-button">
+            <span>➔ Add tag</span>
+          </button>
+    </div>
 
-  <div>
-    <%= form.label :assign_to, style: "display: block" %>
-    <%= form.text_field :assign_to %>
-  </div>
+    <p></p>
 
+    <div calss= "description-container">
+      <input type="text" class="tg-input-description" placeholder="Would you be so kind as to add a short description?">
+    </div>
+
+    <p></p>
+
+  </section>
   <div>
     <%= form.submit %>
   </div>
+
+ <p></p>
+
+  <%= link_to "BACK TO ISSUES", issues_path, class:"btn btn-success3" %>
+
+  </header>
+</div>
+</div>
+
+<div class= "col no-gutters">
+<div class= "rightside">
+  <header class= "newissue-cabecera-derecha">
+
+  <p style="text-align:right;"><%= link_to "X", issues_path, class:"btn btn-success3" %></p>
+
+    <div>
+    <h2> <%= form.label :status, style: "display: block" %> </h2>
+    <select class = "box">
+      <option value="1">New</option>
+      <option value="2">Incomplete</option>
+      <option value="3">Ready</option>
+      <option value="4">In progress</option>
+      <option value="5">Staging</option>
+      <option value="6">Staging to fix</option>
+      <option value="7">Ready to release</option>
+      <option value="8">Closed</option>
+      <option value="9">Need info</option>
+      <option value="10">Rejected</option>
+      <option value="11">Postponed</option>
+    </select>
+  </div>
+
+  <p></p>
+
+     <div>
+    <h2><%= form.label :tipus, style: "display: block" %></h2>
+    <select class="box">
+      <option value="1">Bug</option>
+      <option value="2">Question</option>
+      <option value="3">Enhancement</option>
+    </select>
+  </div>
+
+  <p></p>
+
+  <div>
+    <h2><%= form.label :severity, style: "display: block" %></h2>
+    <select class="box">
+      <option value="1">Wishlist</option>
+      <option value="2">Minor</option>
+      <option value="3">Normal</option>
+      <option value="4">Important</option>
+      <option value="5">Critical</option>
+    </select>
+  </div>
+
+  <p></p>
+
+  <div>
+    <h2><%= form.label :priority, style: "display: block" %></h2>
+    <select class="box">
+      <option value="1">Low</option>
+      <option value="2">Normal</option>
+      <option value="2">High</option>
+    </select>
+  </div>
+
+  <p></p>
+
+  <div>
+    <h2><%= form.label :issue, style: "display: block" %></h2>
+    <%= form.text_field :issue, class:"box"%>
+  </div>
+
+  <p></p>
+
+  <div>
+    <h2><%= form.label :assign_to, style: "display: block"%></h2>
+    <%= form.text_field :assign_to, class:"box"%>
+  </div>
+
+  </header>
+</div>
+</div>
+</div>
 <% end %>

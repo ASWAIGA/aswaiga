@@ -82,6 +82,98 @@ label {
   display: flex;
 }
 
+.btn-success2 {
+  margin-left: 0rem;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.btn-success2:hover {
+  background-color: #1d8fad;
+  color: #ffffff;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.btn-success3 {
+  margin-left: 0rem;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.btn-success3:hover {
+  background-color: #CD5C5C;
+  color: #ffffff ;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.tg-input-subject {
+  padding-right: 50px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid #d8dee9;
+  border-radius: 3px;
+  color: #4c566a;
+  margin: 0;
+  padding: 0.3rem 1rem 0.3rem 0.95rem;
+  width: 35%;
+  transition: 0.3s linear;
+}
+
+.tg-input-description {
+  padding-right: 50px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid #d8dee9;
+  border-radius: 3px;
+  color: #4c566a;
+  margin: 0;
+  padding: 0.3rem 7rem 15rem 0.8rem;
+  width: 78%;
+  transition: 0.3s linear;
+}
+
+.btn-tag {
+  transition: all .3s linear;
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: #f9f9fb;
+  color: #008aa8;
+  padding: 0.5rem 0.5rem;
+  text-transform: none;
+  justify-content: center;
+  line-height: initial;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.btn-tag:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
+}
+
+#tag-button img {
+  width: 20px;
+  height: 20px;
+}
+
 .search-container {
   display: flex;
   align-items: center;
@@ -101,6 +193,7 @@ label {
   width: 150%;
   transition: 0.3s linear;
 }
+
 
 .tg-input-search:focus {
   border: 2px solid #008aa8;
@@ -208,3 +301,60 @@ input:checked + .slider:before {
   justify-content: left;
   align-items: center;
 }
+
+h2 {
+  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+  color: #008aa8;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.leftside, .rightside {
+  width: 100%;
+  height: 100vh;
+}
+
+.leftside {
+
+}
+
+.rightside {
+
+}
+
+.box {
+  width: 120px;
+  height: 30px;
+  border: 1px solid #999;
+  font-size: 18px;
+  color: #000000;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 4px 4px #ccc;
+}
+
+li {
+    position: relative;
+    height: 4rem;
+    background-color: #FAFCFD;
+    padding: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color .3s;
+    opacity: 1;
+
+    &:hover {
+      background-color: #FF908B;
+    }
+
+    &.closed {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      opacity: 0;
+    }
+  }
