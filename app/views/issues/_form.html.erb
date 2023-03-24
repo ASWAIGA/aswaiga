@@ -62,54 +62,28 @@
 
     <div>
     <h2> <%= form.label :status, style: "display: block" %> </h2>
-    <select class = "box">
-      <option value="1">New</option>
-      <option value="2">Incomplete</option>
-      <option value="3">Ready</option>
-      <option value="4">In progress</option>
-      <option value="5">Staging</option>
-      <option value="6">Staging to fix</option>
-      <option value="7">Ready to release</option>
-      <option value="8">Closed</option>
-      <option value="9">Need info</option>
-      <option value="10">Rejected</option>
-      <option value="11">Postponed</option>
-    </select>
+    <%= form.text_field :status, class:"box"%>
   </div>
 
   <p></p>
 
      <div>
     <h2><%= form.label :tipus, style: "display: block" %></h2>
-    <select class="box">
-      <option value="1">Bug</option>
-      <option value="2">Question</option>
-      <option value="3">Enhancement</option>
-    </select>
+    <%= form.text_field :tipus, class:"box"%>
   </div>
 
   <p></p>
 
   <div>
     <h2><%= form.label :severity, style: "display: block" %></h2>
-    <select class="box">
-      <option value="1">Wishlist</option>
-      <option value="2">Minor</option>
-      <option value="3">Normal</option>
-      <option value="4">Important</option>
-      <option value="5">Critical</option>
-    </select>
+    <%= form.text_field :severity, class:"box"%>
   </div>
 
   <p></p>
 
   <div>
     <h2><%= form.label :priority, style: "display: block" %></h2>
-    <select class="box">
-      <option value="1">Low</option>
-      <option value="2">Normal</option>
-      <option value="2">High</option>
-    </select>
+    <%= form.text_field :priority, class:"box"%>
   </div>
 
 
