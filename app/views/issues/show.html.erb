@@ -1,6 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @issue %>
+<strong><%= @issue.comments.count %> Comments</strong>
+<%= render "comments/form" %>
+<%= render @issue.comments.order(id: :desc) %>
+
+
 
 <div>
   <%= link_to "Edit this issue", edit_issue_path(@issue) %> |
