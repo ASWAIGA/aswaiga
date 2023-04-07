@@ -69,7 +69,7 @@ function myFunction() {
         <td><%= issue.tipus %></td>
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue%></td>
+        <td>#<%= issue.id %> <%= link_to issue.issue, issue %></td>
         <td><%= issue.status %></td>
         <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
         <td><%= issue.assign_to %></td>

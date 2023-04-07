@@ -118,6 +118,24 @@ label {
   display: inline;
 }
 
+.btn-success4 {
+  margin-left: 0rem;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.btn-success4:hover {
+  background-color: #000000;
+  color: #ffffff ;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
 .tg-input-subject {
   padding-right: 50px;
   box-sizing: border-box;
@@ -371,12 +389,30 @@ small {
   color: #70728f;
 }
 
+small1 {
+  font-size: .875rem;
+  color: #70728f;
+  font-weight: bold;
+}
+
 textarea {
   width: 100%;
-  min-height: 8rem;
+  min-height: 3rem;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 1px solid #4c566a;
   font-size: 16px;
   resize: none;
+}
+
+span2 {
+  font-size: 1.7rem;
+  line-height: 2rem;
+}
+
+span1 {
+  color: #008aa8;
+  font-weight: bold;
+  font-size: 1.7rem;
+  line-height: 2rem;
 }

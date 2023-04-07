@@ -5,11 +5,11 @@
 <%= render "comments/form" %>
 <%= render @issue.comments.order(id: :desc) %>
 
-
-
 <div>
-  <%= link_to "Edit this issue", edit_issue_path(@issue) %> |
-  <%= link_to "Back to issues", issues_path %>
-
-  <%= button_to "Destroy this issue", @issue, method: :delete %>
+  <%= link_to "Edit this issue", edit_issue_path(@issue), class:"btn btn-success4" %> |
+  <%= link_to "Back to issues", issues_path, class:"btn btn-success2" %>
+  <br>
+  <br>
+  <%= button_to "Destroy this issue", @issue, method: :delete,  class:"btn btn-success3" %>
+  <br>
 </div>
