@@ -1,3 +1,8 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
 <%= form_with(model: issue) do |form| %>
   <% if issue.errors.any? %>
     <div style="color: red">
@@ -28,30 +33,29 @@
     <p></p>
 
     <div class="tag issue">
-          <button class="btn-tag" id="tag-button">
-            <span>➔ Add tag</span>
+          <button class="btn-tag" id="tag-button" type="button">
+            <span>Add tag +</span>
           </button>
     </div>
 
     <p></p>
 
-    <div calss= "description-container">
+    <div class= "description-container">
       <input type="text" class="tg-input-description" placeholder="Would you be so kind as to add a short description?">
     </div>
 
     <p></p>
 
-  </section>
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit %>
+    </div>
+
+    <p></p>
+
+    <%= link_to "BACK TO ISSUES", issues_path, class:"btn btn-success3" %>
+
+    </header>
   </div>
-
- <p></p>
-
-  <%= link_to "BACK TO ISSUES", issues_path, class:"btn btn-success3" %>
-
-  </header>
-</div>
 </div>
 
 <div class= "col no-gutters">
@@ -59,15 +63,14 @@
   <header class= "newissue-cabecera-derecha">
 
   <p style="text-align:right;"><%= link_to "X", issues_path, class:"btn btn-success3" %></p>
-
-    <div>
+  <div>
     <h2> <%= form.label :status, style: "display: block" %> </h2>
     <%= form.text_field :status, class:"box"%>
   </div>
 
   <p></p>
 
-     <div>
+  <div>
     <h2><%= form.label :tipus, style: "display: block" %></h2>
     <%= form.text_field :tipus, class:"box"%>
   </div>
@@ -100,6 +103,89 @@
     <h2><%= form.label :assign_to, style: "display: block"%></h2>
     <%= form.text_field :assign_to, class:"box"%>
   </div>
+
+  <p></p>
+
+  <button id="btn-due_date" class="btn-filter" style="width: 40px; height: 40px;" type="button" onclick= show() >
+    <img src="/img/Icon-watch.png" style="width: 100%; height: 100%;"/>
+  </button>
+  <div id="inputs" class="hidden-inputs">
+    <p style="text-align:right;"><button style="text-align:right;" type="button" class="btn btn-success3" onclick= hide() >X</button></p>
+    <div class="container-popup">
+      <h3 class="title">Set due date</h3>
+      <p>
+      <%= form.text_field :due_date, id: "input1", class: "tg-input-subject", placeholder: (@issue.due_date.present? ? @issue.due_date.strftime('%Y-%m-%d') : "Select date")%>
+      </p>
+      <p></p>
+      <span>Reason for the due date</span>
+      <%= form.text_field :reason_due_date, id: "input2", type: "text", class: "tg-input-description", placeholder: (@issue.reason_due_date.present? ? @issue.reason_due_date : "Why does user story need a due date?") %>
+      <p></p>
+      <%= form.submit "SAVE", class: "btn btn-success2", id: "button-save", onclick: "changeButtonColor()" %>
+    </div>
+  </div>
+
+  <script>
+  function show() {
+    document.getElementById("inputs").classList.remove("hidden-inputs");
+    document.getElementById("inputs").classList.add("popup-effect");
+  }
+
+  function hide() {
+    document.getElementById("inputs").classList.add("hidden-inputs");
+    document.getElementById("inputs").classList.remove("popup-effect");
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    flatpickr("#input1", {
+      dateFormat: "d M Y",
+      enableTime: false,
+      <% if @issue.due_date.present? %>
+        defaultDate: new Date('<%= @issue.due_date.strftime('%Y-%m-%d') %>'),
+      <% end %>
+    });
+  });
+
+  function changeButtonColor() {
+    if (<%= raw @issue.due_date.present?.to_json %>) {
+      const dueDate = '<%= @issue.due_date %>';
+      const btnDueDate = document.getElementById("btn-due_date");
+      const today = new Date();
+      const dueDateObj = new Date(dueDate);
+
+      const timeDiff = dueDateObj.getTime() - today.getTime();
+      const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+      let buttonColor;
+
+      if (diffDays <= 0) {
+        buttonColor = "#ff6969";
+      }
+      else if (diffDays <= 15) {
+        buttonColor = "#ffb266";
+      }
+      else {
+        buttonColor = "#99cc99";
+      }
+      btnDueDate.style.backgroundColor = buttonColor;
+      localStorage.setItem('buttonColor', buttonColor);
+    }
+
+    else {
+      let buttonColor = "light-grey";
+      const btnDueDate = document.getElementById("btn-due_date");
+      btnDueDate.style.backgroundColor = buttonColor;
+      localStorage.setItem('buttonColor', buttonColor);
+    }
+  }
+
+  changeButtonColor();
+
+  const storedButtonColor = localStorage.getItem('buttonColor');
+  if (storedButtonColor) {
+    document.getElementById("btn-due_date").style.backgroundColor = storedButtonColor;
+  }
+
+  </script>
 
   </header>
 </div>

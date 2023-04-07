@@ -28,13 +28,11 @@
       </p>
       <span style="display: inline-block; margin-left: 50px;">Tags</span>
       <%= link_to "+ NEW ISSUE", new_issue_path, class:"btn btn-success" %>
-      <p>
-        <div>
-          <button class="boton-new-bulk">
-            <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
-          </button>
-        </div>
-      </p>
+      <button class="boton-new-bulk">
+        <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
+      </button>
+
+
     </div>
   </header>
 </div>
@@ -68,7 +66,33 @@ function myFunction() {
         <td><%= issue.tipus %></td>
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue%></td>
+        <td><%= link_to issue.issue, issue%> <img id="clockid-<%= issue.id %>" class="clock-icon" src="" alt=""></td>
+        <script>
+          if (<%= issue.due_date.present?.to_json %>) {
+            const dueDate = '<%= issue.due_date %>';
+            const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
+            const today = new Date();
+            const dueDateObj = new Date(dueDate);
+
+            const timeDiff = dueDateObj.getTime() - today.getTime();
+            const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            if (diffDays <= 0) {
+              clock.src = "/img/Icon-clock-red.png";
+            }
+            else if (diffDays <= 15) {
+              clock.src = "/img/Icon-clock-orange.png";
+            }
+            else {
+              clock.src = "/img/Icon-clock-green.png";
+            }
+          }
+
+          else {
+            const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
+            clock.src = "/img/Icon-no-clock.png";
+          }
+        </script>
         <td><%= issue.status %></td>
         <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
         <td><%= issue.assign_to %></td>

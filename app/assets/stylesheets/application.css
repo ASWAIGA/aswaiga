@@ -38,7 +38,7 @@ label {
   transition: all .3s linear;
   font-size: 0.875rem;
   align-items: center;
-  background-color: #f9f9fb;
+  background-color: #e9eff1;
   color: #008aa8;
   padding: 0.5rem 0.5rem;
   text-transform: none;
@@ -65,7 +65,9 @@ label {
 }
 
 .btn-success {
-  margin-left: 45rem;
+  right: 20px;
+  margin-right: 7em;
+  position: absolute;
   background-color: #83eede;
   color: #2e3440;
   transition: all .3s linear;
@@ -127,7 +129,7 @@ label {
   color: #4c566a;
   margin: 0;
   padding: 0.3rem 1rem 0.3rem 0.95rem;
-  width: 35%;
+  width: 100%;
   transition: 0.3s linear;
 }
 
@@ -139,7 +141,7 @@ label {
   border-radius: 3px;
   color: #4c566a;
   margin: 0;
-  padding: 0.3rem 7rem 15rem 0.8rem;
+  padding: 0.3rem 7rem 7rem 0.8rem;
   width: 78%;
   transition: 0.3s linear;
 }
@@ -270,16 +272,17 @@ input:checked + .slider:before {
 }
 
 .boton-new-bulk {
+  right: 20px;
+  margin-right: 4em;
+  position: absolute;
   width: 40px;
   height: 40px;
   border-radius: 10%;
-  display: inline-block;
   background-color: #9e9e9e;
   border: none;
   cursor: pointer;
   align-items: center;
   transition: all .2s linear;
-  transform: translate(25px, 0px);
 }
 
 .boton-new-bulk:hover{
@@ -311,17 +314,16 @@ h2 {
   margin-bottom: 0.2rem;
 }
 
+h3 {
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  color: #2e3440;
+  font-weight: 400;
+}
+
 .leftside, .rightside {
   width: 100%;
   height: 100vh;
-}
-
-.leftside {
-
-}
-
-.rightside {
-
 }
 
 .box {
@@ -333,6 +335,55 @@ h2 {
   background-color: #eee;
   border-radius: 5px;
   box-shadow: 4px 4px #ccc;
+}
+
+.hidden-inputs {
+  display: none;
+}
+
+.popup-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  z-index: 9999;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+}
+
+.container-popup {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-popup #input1 {
+  width: 40em;
+  height: 2em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.container-popup #input2 {
+  width: 40em;
+  height: 10em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.container-popup #button-save {
+  width: 40em;
+  height: 3em;
+}
+
+.clock-icon {
+  width: 15px;
+  height: 15px;
 }
 
 li {
