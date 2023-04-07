@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @issue %>
-<strong><%= @issue.comments.count %> Comments</strong>
+<span3><%= @issue.comments.count %> Comments</span3>
 <%= render "comments/form" %>
 <%= render @issue.comments.order(id: :desc) %>
 
