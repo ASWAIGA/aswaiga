@@ -5,6 +5,14 @@
     <header>
       <h1>Issues</h1>
     </header>
+    <div id= "login">
+            <% if current_user %>
+              <%= link_to "#{current_user.full_name}", edit_user_registration_path, class:"btn btn-success"%>
+              <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success"%>
+            <% else %>
+              <%= button_to "Log in", user_google_oauth2_omniauth_authorize_path, data: {turbo: "false"}, method: :post, class:"btn btn-success"%>
+            <% end %>
+    </div>
     <div id= "contenidor">
       <p>
         <div class="opciones issue">
