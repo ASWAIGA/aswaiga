@@ -1,9 +1,24 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: %i[ show edit update destroy ]
+  before_action :set_issue, only: %i[ show edit update destroy delete_attachments ]
 
   # GET /issues or /issues.json
   def index
-    @issues = Issue.all
+    # @issues = Issue.all
+    # @issues = issues.where(status: params[:status]) if params[:status].present?
+    # @issues = issues.where(priority: params[:priority]) if params[:priority].present?
+    # @issues = issues.where(assign_to: params[:assign_to]) if params[:assign_to].present?
+    # @issues = issues.where(assignee: params[:assignee]) if params[:assignee].present?
+    # @issues = issues.where(tags: params[:tags]) if params[:tags].present?
+    # @issues = issues.where(created_by: params[:created_by]) if params[:created_by].present?
+
+     @issues = Issue.all
+     if params[:search]
+       if params[:search].present?
+        @issues = @issues.where("subject LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      else
+        @issues = @issues
+      end
+    end
   end
 
   # GET /issues/1 or /issues/1.json
@@ -47,6 +62,12 @@ class IssuesController < ApplicationController
     end
   end
 
+  def delete_attachments
+    @issue_interessa = Issue.find(params[:id])
+    @issue_interessa.attachments.purge;
+    redirect_to @issue_interessa
+  end
+
   # DELETE /issues/1 or /issues/1.json
   def destroy
     @issue.destroy
@@ -65,6 +86,6 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to,)
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :subject, :description, attachments: [])
     end
 end

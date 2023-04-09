@@ -1,10 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @issue %>
 
-<div>
-  <%= link_to "Edit this issue", edit_issue_path(@issue) %> |
-  <%= link_to "Back to issues", issues_path %>
+  <div class="row no-gutters">
+    <div class="col no-gutters">
+      <div class= "leftside">
+        <header class= "newissue-cabecera-izquierda">
+        <%= link_to "Edit this issue", edit_issue_path(@issue) %> |
+        <%= link_to "Back to issues", issues_path %>
+        <p></p>
 
-  <%= button_to "Destroy this issue", @issue, method: :delete %>
-</div>
+        <%= button_to "Destroy this issue", @issue, method: :delete %>
+
+        </div>
+      </div>
+
+      <div class= "col no-gutters">
+        <div class= "rightside">
+          <%= render @issue %>
+        </div>
+      </div>
+    </div>

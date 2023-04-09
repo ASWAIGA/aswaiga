@@ -22,7 +22,7 @@
     </header>
 
     <div class= "subject-container">
-          <input type="text" class="tg-input-subject" placeholder="Add the subject you want">
+          <%= form.text_field :subject,  class:"tg-input-subject", placeholder: "Add the subject you want"%>
     </div>
 
     <p></p>
@@ -36,7 +36,7 @@
     <p></p>
 
     <div calss= "description-container">
-      <input type="text" class="tg-input-description" placeholder="Would you be so kind as to add a short description?">
+      <%= form.text_field :description, class:"tg-input-description", placeholder: "Would you be so kind as to add a short description?"%>
     </div>
 
     <p></p>

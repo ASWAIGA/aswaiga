@@ -13,13 +13,21 @@
             <span>Filters</span>
           </button>
         </div>
-      </p>
-      <p>
-        <div class= "search-container">
-          <input type="text" class="tg-input-search" placeholder="subject or reference">
-          <img src="/img/Icon-search.png" alt="icono" class="search-icon">
+        <div id="box-container">
+          <div id="box-content">This is the content of the box</div>
         </div>
       </p>
+
+      <p>
+      <div class= "search-container">
+        <%= form_tag issues_path, method: :get do %>
+        <%= text_field_tag :search, params[:search], placeholder: "subject or reference"%>
+        <img src="/img/Icon-search.png" alt="icono" class="search-icon">
+        <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon">
+        <% end %>
+      </div>
+      </p>
+
       <p>
         <label class= "tag-switch">
             <input type="checkbox" id="mySwitch" onclick="myFunction()" class="checkbox-tags">
@@ -48,7 +56,7 @@ function myFunction() {
 }
 </script>
 
-
+<% if @issues.any? %>
 <div id="issues">
   <table class="table table-striped table-borderless">
     <thead>
@@ -62,18 +70,22 @@ function myFunction() {
         <th>ASSIGN TO</th>
       </tr>
     </thead>
-    <% @issues.each do |issue| %>
-    <tbody>
-      <tr>
-        <td><%= issue.tipus %></td>
-        <td><%= issue.severity %></td>
-        <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue%></td>
-        <td><%= issue.status %></td>
-        <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
-        <td><%= issue.assign_to %></td>
-      </tr>
-    </tbody>
+      <% @issues.each do |issue| %>
+      <tbody>
+        <tr>
+          <td><%= issue.tipus %></td>
+          <td><%= issue.severity %></td>
+          <td><%= issue.priority %></td>
+          <td><%= link_to issue.issue, issue%></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
+          <td><%= issue.assign_to %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    <% else %>
+      <p> No issues found ☹ </p>
     <% end %>
+
   </table>
 </div>
