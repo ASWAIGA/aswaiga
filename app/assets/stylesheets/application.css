@@ -75,11 +75,11 @@ label {
   border: 0;
   border-radius: 4px;
   font: inherit;
-  transform: translate(3px, 3px);
+  transform: translate(3px, 1px);
 }
 
 .btn-filter2:hover {
-  background-color: #dedede;
+  background-color: #D6DBDF;
   border-color: transparent;
   align-items: center;
 }
@@ -228,14 +228,13 @@ label {
 }
 
 .filters-icon {
-  width: 70%;
+  width: 50%;
   align-items: center;
-  transform: translate(0px, 0px);
+  transform: translate(2px, 0px);
 }
 
 .filters-icon2 {
-
-  width: 10%;
+  width: 5%;
   align-items: center;
   transform: translate(3px, 3px);
 }
