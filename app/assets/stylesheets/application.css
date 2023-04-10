@@ -59,6 +59,31 @@ label {
   display: flex;
 }
 
+ .btn-filter2 {
+  transition: all .3s linear;
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: #f9f9fb;
+  color: #008aa8;
+  padding: 0.3rem 0.2rem;
+  text-transform: none;
+  justify-content: center;
+  line-height: initial;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  transform: translate(3px, 3px);
+}
+
+.btn-filter2:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+}
+
 .btn-success {
   margin-left: 45rem;
   background-color: #83eede;
@@ -175,8 +200,7 @@ label {
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: right;
-  margin-left: 1rem;
+  margin-right: 10px;
 }
 
 .tg-input-search {
@@ -200,16 +224,31 @@ label {
 .search-icon {
   position: absolute;
   align-items: center;
-  transform: translate(-30px, +3px);
+  transform: translate(-25px, 5px);
 }
 
 .filters-icon {
   width: 70%;
   align-items: center;
-  transform: translate(-5px, 0px);
+  transform: translate(0px, 0px);
+}
+
+.filters-icon2 {
+
+  width: 10%;
+  align-items: center;
+  transform: translate(3px, 3px);
+}
+
+.filetrs-icon2:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
 }
 
 .tag-switch {
+  margin-left: 5px;
   position: absolute;
   align-items: center;
   width: 35px;
@@ -238,7 +277,7 @@ label {
 .checkbox-tags {
   width: 10px;
   height: 10px;
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .slider:before {
@@ -346,6 +385,17 @@ h2 {
 
 .box {
   width: 120px;
+  height: 30px;
+  border: 1px solid #999;
+  font-size: 18px;
+  color: #000000;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 4px 4px #ccc;
+}
+
+.box2 {
+  width: 175px;
   height: 30px;
   border: 1px solid #999;
   font-size: 18px;

@@ -19,6 +19,17 @@ class IssuesController < ApplicationController
         @issues = @issues
       end
     end
+
+     if params[:sort].present?
+        case params[:sort]
+        when 'status_asc'
+          @issues = @issues.order(status: :asc)
+        when 'priority_asc'
+          @issues = @issues.order(priority: :asc)
+        when 'assign_to_asc'
+          @issues = @issues.order(assign_to: :asc)
+        end
+      end
   end
 
   # GET /issues/1 or /issues/1.json
