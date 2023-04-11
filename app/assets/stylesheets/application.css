@@ -224,7 +224,7 @@ label {
 .search-icon {
   position: absolute;
   align-items: center;
-  transform: translate(-25px, 5px);
+  transform: translate(-25px, 4px);
 }
 
 .filters-icon {
@@ -244,6 +244,19 @@ label {
   border-color: transparent;
   align-items: center;
   display: flex;
+}
+
+.attachments_box {
+  margin-left: -12px;
+}
+
+.attach_filename {
+  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+  color: #008aa8;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .tag-switch {

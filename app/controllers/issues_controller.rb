@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: %i[ show edit update destroy delete_attachments ]
+  before_action :set_issue, only: %i[ show edit update destroy  ]
 
   # GET /issues or /issues.json
   def index
@@ -87,6 +87,12 @@ class IssuesController < ApplicationController
       format.html { redirect_to issues_url, notice: "Issue was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def delete_attachment
+    @issue_interessa = Issue.find(params[:id])
+    @issue_interessa.attachments.purge
+    redirect_to @issue_interessa
   end
 
   private

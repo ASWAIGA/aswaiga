@@ -29,4 +29,20 @@
     <%= issue.assign_to %>
   </p>
 
+  <p>
+    <strong>Attachments:</strong>
+    <p></p>
+     <% i = 0
+     (0...@issue.attachments.count).each do |attachment| %>
+        <%= link_to raw("<img src='https://cdn-icons-png.flaticon.com/512/1085/1085716.png', width='40'>"),
+        @issue.attachments[attachment] %>
+        <p> <%=  @issue.attachments[attachment].filename%> </p>
+
+    <%
+    i = i + 1
+    end
+    %>
+
+  </p>
+
 </div>

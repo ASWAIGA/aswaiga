@@ -41,6 +41,14 @@
 
     <p></p>
 
+    <div class="attachments container">
+      <div class="field">
+        <%= form.file_field :attachments, multiple: true, class:"attachments_box"  %>
+      </div>
+    </div>
+
+    <p></p>
+
   </section>
   <div>
     <%= form.submit %>
