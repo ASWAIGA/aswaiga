@@ -224,7 +224,7 @@ label {
 .search-icon {
   position: absolute;
   align-items: center;
-  transform: translate(-25px, 5px);
+  transform: translate(-30px, 5px);
 }
 
 .filters-icon {
@@ -402,6 +402,7 @@ h2 {
   background-color: #eee;
   border-radius: 5px;
   box-shadow: 4px 4px #ccc;
+  margin-left: 10px;
 }
 
 li {
