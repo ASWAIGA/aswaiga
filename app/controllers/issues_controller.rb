@@ -30,6 +30,22 @@ class IssuesController < ApplicationController
           @issues = @issues.order(assign_to: :asc)
         end
       end
+
+      if params[:filter_status]
+          if params[:filter_status]
+            @issues = @issues.where("status LIKE ?", "%#{params[:filter_status]}%")
+          end
+      end
+      if params[:filter_priority]
+          if params[:filter_priority]
+            @issues = @issues.where("priority LIKE ?", "%#{params[:filter_priority]}%")
+          end
+      end
+      if params[:filter_assign_to]
+       if params[:filter_assign_to].present?
+        @issues = @issues.where("assign_to LIKE ?", "%#{params[:filter_assign_to]}%")
+       end
+      end
   end
 
   # GET /issues/1 or /issues/1.json

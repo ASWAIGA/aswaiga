@@ -50,6 +50,8 @@ label {
   border: 0;
   border-radius: 4px;
   font: inherit;
+  margin-top: 40px;
+  height: 30px;
 }
 
 .btn-filter:hover {
@@ -75,7 +77,10 @@ label {
   border: 0;
   border-radius: 4px;
   font: inherit;
-  transform: translate(3px, 1px);
+  transform: translate(3px, 3px);
+  width: 35px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .btn-filter2:hover {
@@ -221,25 +226,39 @@ label {
   border: 2px solid #008aa8;
 }
 
-.search-icon {
+.search-icon1 {
   position: absolute;
   align-items: center;
   transform: translate(-30px, 5px);
 }
 
-.filters-icon {
-  width: 50%;
+.search-icon2 {
+  position: absolute;
   align-items: center;
-  transform: translate(2px, 0px);
+  transform: translate(-26px, 3px);
+}
+
+.filters-icon1 {
+  width: 70%;
+  align-items: center;
+  transform: translate(113px, 0px);
+  margin-right: 2px;
 }
 
 .filters-icon2 {
-  width: 5%;
+  width: 70%;
   align-items: center;
-  transform: translate(3px, 3px);
+  transform: translate(122px, 0px);
+  margin-right: 2px;
 }
 
-.filetrs-icon2:hover {
+.sort-icon {
+  width: 60%;
+  align-items: center;
+  transform: translate(1px, 2px);
+}
+
+.filetrs-icon:hover {
   background-color: #dedede;
   border-color: transparent;
   align-items: center;
@@ -330,6 +349,50 @@ input:checked + .slider:before {
   height: auto;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  color: #212529;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown-toggle:focus,
+.dropdown-toggle:hover {
+  background-color: #e9ecef;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dropdown-menu input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 #contenidor {
   width: 250%;
   height: 50px;
@@ -380,6 +443,42 @@ h2 {
 
 .rightside {
 
+}
+
+.left-filters{
+    width: 15%;
+    min-width: 350px;
+    height: available;
+    min-height: 300px;
+    float: left;
+    background-color: white;
+    border-collapse: collapse;
+    margin-top:300px;
+}
+
+.filter-text1 {
+  text-align: right;
+  margin-left: 120px;
+}
+
+.filter-text2 {
+  text-align: right;
+  margin-left: 130px;
+}
+
+.text-no-issues-found {
+  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+  color: #black;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 120px;
+  margin-top: 275px;
+}
+
+#issues_table{
+    margin-top:10px;
+    margin-left:500px;
 }
 
 .box {
