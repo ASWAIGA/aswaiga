@@ -224,7 +224,11 @@ label {
 .search-icon {
   position: absolute;
   align-items: center;
+<<<<<<< HEAD
   transform: translate(-25px, 4px);
+=======
+  transform: translate(-30px, 5px);
+>>>>>>> feature20-afegir_filtres
 }
 
 .filters-icon {
@@ -415,6 +419,7 @@ h2 {
   background-color: #eee;
   border-radius: 5px;
   box-shadow: 4px 4px #ccc;
+  margin-left: 10px;
 }
 
 li {
