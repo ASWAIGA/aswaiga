@@ -70,7 +70,7 @@ function myFunction() {
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
         <td>
-          #<%= link_to issue.id, issue, class: "no-underline1" %> <%= link_to issue.issue, issue, class: "no-underline" %>
+          <%= link_to issue.issue, issue, class: "no-underline" %>
         </td>
         <td><%= issue.status %></td>
         <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
