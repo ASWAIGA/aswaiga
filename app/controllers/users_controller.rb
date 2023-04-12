@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(usuario_params)
-    redirect_to @user, notice: 'Perfil actualizado exitosamente.'
+    redirect_to @user
   end
 
   private

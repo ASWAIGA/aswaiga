@@ -1,3 +1,7 @@
+<p style="color: green"><%= notice %></p>
+
+<p><%= link_to "Home", issues_path %></p>
+
 <div class="profile-info">
     <p>
         <% if @user.image.attached? %>
@@ -14,8 +18,9 @@
         <% end %>
     </p>
 </div>
-<br/>
-<% if @user == current_user %>
-    <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success" %>
+<p>
+    <% if @user == current_user %>
+    <%= link_to "Edit", edit_user_registration_path %>
 <% end %>
-<%= link_to "Back", issues_path, class:"btn btn-success" %>
+</p>
+<%= link_to "Back", users_path %>

@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<p><%= link_to "Home", issues_path %></p>
+
+<h1>List of users</h1>
+
+<% @users.each do |user| %>
+ <h2>
+ <p>
+  <% if user.image.attached? %>
+      <%= image_tag user.image, :style => "height: 100px; width: 100px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+  <% else %>
+      <img src="/assets/default-user.jpg" style="height: 100px; width: 100px; margin-left: auto; margin-right: auto; border-radius: 50%">
+  <%end%>
+  <%= link_to "#{user.full_name}", user_path(user.id) %>
+ </p>
+ </h2>
+  <br/>
+<%end%>
