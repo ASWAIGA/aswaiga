@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<p><%= link_to "Home", issues_path %></p>
+<p><%= link_to "Home", issues_path, class:"btn btn-success-left" %></p>
 
 <center>
     <div class="profile-info" style: "text-align: center">
@@ -16,7 +16,7 @@
         <p>
         <div class=input-field>
             CHANGE PHOTO<br/>
-            <%= f.file_field :image %>
+            <%= f.file_field :image, class:"btn btn-success-left" %>
         </div>
         </p>
 
@@ -35,10 +35,8 @@
         </p>
 
         <div class="actions">
-            <%= f.submit "Update" %>
+            <%= f.submit "Update", class:"btn btn-success-left" %>
         </div>
     <%end%>
-     <p>
-            <%= link_to "Back", user_path(current_user.id)%>
-        </p>
+    <br/>
  </center>

@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<p><%= link_to "Home", issues_path %></p>
+<p><%= link_to "Home", issues_path, class:"btn btn-success-left" %></p>
 
 <div class="profile-info">
     <p>
@@ -20,7 +20,14 @@
 </div>
 <p>
     <% if @user == current_user %>
-    <%= link_to "Edit", edit_user_registration_path %>
+    <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success-left" %>
 <% end %>
 </p>
-<%= link_to "Back", users_path %>
+
+<p>
+    <h2>Timeline</h2>
+</p>
+
+<p>
+    <h2>Issues watched</h2>
+</p>
