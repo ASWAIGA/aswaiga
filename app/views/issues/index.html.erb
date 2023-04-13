@@ -68,7 +68,7 @@ function myFunction() {
         <td><%= issue.tipus %></td>
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue%></td>
+        <td><%= link_to issue.issue, issue %></td>
         <td><%= issue.status %></td>
         <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
         <td><%= issue.assign_to %></td>
@@ -76,18 +76,16 @@ function myFunction() {
     </tbody>
     <% end %>
   </table>
-
+  <br>
   <div id ="bulkinsert" class="hidden-bulk">
     <h10><center>New bulk insert</center></h10>
-    <%= form_tag issues_path, method: :post do %>
-    <div class="form-group">
-      <br>
-      <%= text_area_tag :issue_names, nil, class: "form-control", rows: 10, placeholder:"One item per line..." %>
-    </div>
-    <br>
-    <%= submit_tag "SAVE", class: "btn btn-success10" %>
-    <% end %>
+      <%= form_tag({ action: 'create_issues_bulk' }, method: 'post') do %>
+        <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
+        <%= submit_tag "SAVE", class: "btn btn-success10" %>
+      <% end %>
   </div>
+  <br>
+  <br>
 </div>
 
  <script>

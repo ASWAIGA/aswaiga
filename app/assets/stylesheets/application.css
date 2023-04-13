@@ -369,7 +369,7 @@ h10 {
 }
 
 .btn-success10 {
-  margin-left: 77rem;
+  margin-left: 56rem;
   background-color: #83eede;
   color: #2e3440;
   transition: all .3s linear;
@@ -388,4 +388,24 @@ h10 {
 
 .hidden-bulk {
   display: none;
+}
+
+.tg-input-search2 {
+  padding-right: 50px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid #d8dee9;
+  border-radius: 3px;
+  color: #4c566a;
+  margin-left: 19.5rem;
+  padding: 0.3rem 1rem 0.3rem 0.95rem;
+  width: 50%;
+  transition: 0.3s linear;
+  max-height: 12rem;
+  min-height: 15rem;
+}
+
+
+.tg-input-search2:focus {
+  border: 2px solid #008aa8;
 }

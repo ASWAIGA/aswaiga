@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/1 or /issues/1.json
   def show
+    @issue = Issue.find(params[:id])
   end
 
   # GET /issues/new
@@ -19,11 +20,10 @@ class IssuesController < ApplicationController
   def edit
   end
 
-  def bcreate
-    issue_names = params[:issue_names].split("\n")
-
-    issue_names.each do |issue|
-      Issue.bcreate(issue: issue)
+  def create_issues_bulk
+    issue_titles = params[:issue_titles]&.split("\n").map(&:strip)
+    issue_titles.each do |issue|
+      Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
     end
 
     redirect_to issues_path
