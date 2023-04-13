@@ -50,6 +50,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/1 or /issues/1.json
   def show
+    @issue = Issue.find(params[:id])
   end
 
   # GET /issues/new
@@ -64,7 +65,6 @@ class IssuesController < ApplicationController
   # POST /issues or /issues.json
   def create
     @issue = Issue.new(issue_params)
-
     respond_to do |format|
       if @issue.save
         format.html { redirect_to issue_url(@issue), notice: "Issue was successfully created." }
@@ -89,12 +89,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  def delete_attachments
-    @issue_interessa = Issue.find(params[:id])
-    @issue_interessa.attachments.purge;
-    redirect_to @issue_interessa
-  end
-
   # DELETE /issues/1 or /issues/1.json
   def destroy
     @issue.destroy
@@ -105,11 +99,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  def delete_attachment
-    @issue_interessa = Issue.find(params[:id])
-    @issue_interessa.attachments.purge
-    redirect_to @issue_interessa
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
