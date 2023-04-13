@@ -7,7 +7,9 @@
     </header>
     <p>
     <div id ="list_users">
-      <%= link_to "Team", users_path, class:"btn btn-success-left" %>
+      <% if current_user %>
+        <%= link_to "Team", users_path, class:"btn btn-success-left" %>
+      <%end%>
     </div>
     </p>
     <div id= "login">
