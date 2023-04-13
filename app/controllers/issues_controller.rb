@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: %i[ show edit update destroy ]
+  before_action :set_issue, only: %i[  edit update destroy ]
 
   # GET /issues or /issues.json
   def index
@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/1 or /issues/1.json
   def show
+    @issue = Issue.find(params[:id])
   end
 
   # GET /issues/new
@@ -17,6 +18,15 @@ class IssuesController < ApplicationController
 
   # GET /issues/1/edit
   def edit
+  end
+
+  def create_issues_bulk
+    issue_titles = params[:issue_titles]&.split("\n").map(&:strip)
+    issue_titles.each do |issue|
+      Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
+    end
+
+    redirect_to issues_path
   end
 
   # POST /issues or /issues.json
@@ -60,7 +70,7 @@ class IssuesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
-      @issue = Issue.find(params[:id])
+
     end
 
     # Only allow a list of trusted parameters through.

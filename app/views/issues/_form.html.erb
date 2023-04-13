@@ -23,19 +23,20 @@
 
     <div class= "subject-container">
           <input type="text" class="tg-input-subject" placeholder="Add the subject you want">
+          <%= form.text_field :issue %>
     </div>
 
     <p></p>
 
     <div class="tag issue">
           <button class="btn-tag" id="tag-button">
-            <span>➔ Add tag</span>
+            <span>Add tag + </span>
           </button>
     </div>
 
     <p></p>
 
-    <div calss= "description-container">
+    <div class= "description-container">
       <input type="text" class="tg-input-description" placeholder="Would you be so kind as to add a short description?">
     </div>
 
@@ -84,14 +85,6 @@
   <div>
     <h2><%= form.label :priority, style: "display: block" %></h2>
     <%= form.text_field :priority, class:"box"%>
-  </div>
-
-
-  <p></p>
-
-  <div>
-    <h2><%= form.label :issue, style: "display: block" %></h2>
-    <%= form.text_field :issue, class:"box"%>
   </div>
 
   <p></p>

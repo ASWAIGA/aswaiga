@@ -4,9 +4,13 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  resources :issues
+  resources :issues do
+    resources :comments
+  end
   resources :users
   get 'issues/index'
+  post 'issues/create_issues_bulk'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'issues#index'
