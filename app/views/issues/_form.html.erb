@@ -28,6 +28,7 @@
 
     <div class= "subject-container">
           <input type="text" class="tg-input-subject" placeholder="Add the subject you want">
+          <%= form.text_field :issue %>
     </div>
 
     <p></p>
@@ -89,14 +90,6 @@
     <%= form.text_field :priority, class:"box"%>
   </div>
 
-
-  <p></p>
-
-  <div>
-    <h2><%= form.label :issue, style: "display: block" %></h2>
-    <%= form.text_field :issue, class:"box"%>
-  </div>
-
   <p></p>
 
   <div>
@@ -112,7 +105,7 @@
   <div id="inputs" class="hidden-inputs">
     <p style="text-align:right;"><button style="text-align:right;" type="button" class="btn btn-success3" onclick= hide() >X</button></p>
     <div class="container-popup">
-      <h3 class="title">Set due date</h3>
+      <h4 class="title">Set due date</h4>
       <p>
       <%= form.text_field :due_date, id: "input1", class: "tg-input-subject", placeholder: (@issue.due_date.present? ? @issue.due_date.strftime('%Y-%m-%d') : "Select date")%>
       </p>

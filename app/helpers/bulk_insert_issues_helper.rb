@@ -1,0 +1,2 @@
+module BulkInsertIssuesHelper
+end

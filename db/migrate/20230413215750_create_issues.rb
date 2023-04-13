@@ -9,6 +9,7 @@ class CreateIssues < ActiveRecord::Migration[7.0]
       t.string :assign_to
       t.date :due_date
       t.string :reason_due_date
+
       t.timestamps
     end
   end

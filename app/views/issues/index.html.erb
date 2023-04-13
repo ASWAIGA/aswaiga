@@ -5,6 +5,24 @@
     <header>
       <h1>Issues</h1>
     </header>
+    <p>
+    <div id ="list_users">
+      <%= link_to "Team", users_path, class:"btn btn-success-left" %>
+    </div>
+    </p>
+    <div id= "login">
+            <% if current_user %>
+              <%= link_to user_path(current_user.id) do %>
+               <% if current_user.image.attached? %>
+                 <%= image_tag current_user.image, :style => "height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+               <% else %>
+                 <img src="/assets/default-user.jpg" style="height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%">
+               <%end%>
+              <% end %>
+            <% else %>
+              <%= button_to "Log in", user_google_oauth2_omniauth_authorize_path, data: {turbo: "false"}, method: :post, class:"btn btn-success-left" %>
+            <% end %>
+    </div>
     <div id= "contenidor">
       <p>
         <div class="opciones issue">
@@ -28,11 +46,9 @@
       </p>
       <span style="display: inline-block; margin-left: 50px;">Tags</span>
       <%= link_to "+ NEW ISSUE", new_issue_path, class:"btn btn-success" %>
-      <button class="boton-new-bulk">
+      <button class="boton-new-bulk" onclick= show()>
         <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
       </button>
-
-
     </div>
   </header>
 </div>
@@ -100,4 +116,28 @@ function myFunction() {
     </tbody>
     <% end %>
   </table>
+  <br>
+  <div id ="bulkinsert" class="hidden-bulk">
+    <h10><center>New bulk insert</center></h10>
+      <%= form_tag({ action: 'create_issues_bulk' }, method: 'post') do %>
+        <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
+        <%= submit_tag "SAVE", class: "btn btn-success9" %>
+      <% end %>
+  </div>
+  <br>
+  <br>
 </div>
+
+ <script>
+    let message = false;
+    function show() {
+      if (message === false) {
+        document.getElementById("bulkinsert").classList.remove("hidden-bulk");
+        message = true;
+      }
+      else {
+        document.getElementById("bulkinsert").classList.add("hidden-bulk");
+        message = false;
+      }
+    }
+  </script>
