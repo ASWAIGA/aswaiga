@@ -74,6 +74,17 @@ label {
   display: flex;
 }
 
+.btn-success-left {
+  display: inline;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+}
+
 .btn-success:hover {
   background-color: #1d8fad;
   color: #ffffff;

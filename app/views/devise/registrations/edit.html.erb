@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<p><%= link_to "Home", issues_path, class:"btn btn-success-left" %></p>
+
+<center>
+    <div class="profile-info" style: "text-align: center">
+        <p>
+            <% if current_user.image.attached? %>
+                <%= image_tag @user.image, :style => "height: 200px; width: 200px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+            <% else %>
+                <img src="/assets/default-user.jpg" style="height: 200px; width: 200px; margin-left: auto; margin-right: auto; border-radius: 50%">
+            <%end%>
+        </p>
+    </div>
+    <%= form_for(resource, as: resource_name, url: user_path(current_user.id), html: { method: :put }) do |f| %>
+        <p>
+        <div class=input-field>
+            CHANGE PHOTO<br/>
+            <%= f.file_field :image, class:"btn btn-success-left" %>
+        </div>
+        </p>
+
+        <p>
+        <div class="form-group">
+            <%= f.label :full_name %>
+            <%= f.text_field :full_name, autofocus: true, class: 'form-control' %>
+        </div>
+        </p>
+
+        <p>
+        <div class="form-group">
+            Bio (max. 210 chars)
+            <%= f.text_area :bio, autofocus: true, maxlength: "210", class: 'form-control' %>
+        </div>
+        </p>
+
+        <div class="actions">
+            <%= f.submit "Update", class:"btn btn-success-left" %>
+        </div>
+    <%end%>
+    <br/>
+ </center>

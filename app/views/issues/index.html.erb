@@ -5,6 +5,27 @@
     <header>
       <h1>Issues</h1>
     </header>
+    <p>
+    <div id ="list_users">
+      <%= link_to "Team", users_path, class:"btn btn-success-left" %>
+    </div>
+    </p>
+    <div id= "login">
+            <% if current_user %>
+              <%= link_to user_path(current_user.id) do %>
+               <% if current_user.image.attached? %>
+                 <%= image_tag current_user.image, :style => "height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+               <% else %>
+                 <img src="/assets/default-user.jpg" style="height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%">
+               <%end%>
+              <% end %>
+              <p>
+                <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success-left" %>
+              </p>
+            <% else %>
+              <%= button_to "Log in", user_google_oauth2_omniauth_authorize_path, data: {turbo: "false"}, method: :post, class:"btn btn-success-left" %>
+            <% end %>
+    </div>
     <div id= "contenidor">
       <p>
         <div class="opciones issue">

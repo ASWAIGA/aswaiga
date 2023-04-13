@@ -32,6 +32,11 @@ group :production do
   gem "pg", "1.3.5"
 end
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
 # Uncomment the following line if you're running Rails
 # on a native Windows system:
