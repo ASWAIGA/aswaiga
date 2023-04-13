@@ -19,6 +19,16 @@ class IssuesController < ApplicationController
   def edit
   end
 
+  def bcreate
+    issue_names = params[:issue_names].split("\n")
+
+    issue_names.each do |issue|
+      Issue.bcreate(issue: issue)
+    end
+
+    redirect_to issues_path
+  end
+
   # POST /issues or /issues.json
   def create
     @issue = Issue.new(issue_params)
