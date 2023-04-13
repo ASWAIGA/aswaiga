@@ -430,7 +430,56 @@ h10 {
   min-height: 15rem;
 }
 
+textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #4c566a;
+  font-size: 16px;
+  resize: none;
+}
 
 .tg-input-search2:focus {
   border: 2px solid #008aa8;
+}
+
+.hidden-comments {
+  display: none;
+}
+
+.btn-success10 {
+  color: #2e3440;
+  transition: all .3s linear;
+  display: inline;
+  text-align: left;
+}
+
+.btn-success10 .btn-success10.active {
+  border-bottom: 3px solid #434456;
+  color: #434456;
+}
+
+.btn-success10:hover {
+  display: inline;
+}
+
+span3 {
+  font-family: Ubuntu-Medium,Arial,Helvetica,sans-serif;
+  transition: all .1s linear;
+  color: #434456;
+  display: inline-block;
+  font-family: Helvetica;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+span3:hover {
+  font-family: Ubuntu-Medium,Arial,Helvetica,sans-serif;
+  transition: all .1s linear;
+  color: #25a28c;
+  display: inline-block;
+  font-family: Helvetica;
+  margin-bottom: 1rem;
+  font-weight: bold;
 }
