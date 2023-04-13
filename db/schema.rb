@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_164248) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_180249) do
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "issue_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_comments_on_issue_id"
+  end
+
   create_table "issues", force: :cascade do |t|
     t.string "tipus"
     t.string "severity"
     t.string "priority"
-    t.string "issue"
+    t.string "issue", null: false
     t.string "status"
     t.string "assign_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "issues"
 end

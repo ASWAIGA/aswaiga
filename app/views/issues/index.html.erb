@@ -32,6 +32,7 @@
         <div>
           <button class="boton-new-bulk" onclick= show()>
             <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
+
           </button>
         </div>
       </p>
@@ -68,7 +69,9 @@ function myFunction() {
         <td><%= issue.tipus %></td>
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue %></td>
+        <td>
+          <%= link_to issue.issue, issue, class: "no-underline" %>
+        </td>
         <td><%= issue.status %></td>
         <td><%= issue.updated_at.strftime("%d %b %Y") %></td>
         <td><%= issue.assign_to %></td>
@@ -81,7 +84,7 @@ function myFunction() {
     <h10><center>New bulk insert</center></h10>
       <%= form_tag({ action: 'create_issues_bulk' }, method: 'post') do %>
         <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
-        <%= submit_tag "SAVE", class: "btn btn-success10" %>
+        <%= submit_tag "SAVE", class: "btn btn-success9" %>
       <% end %>
   </div>
   <br>
