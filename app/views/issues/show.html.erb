@@ -1,9 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @issue %>
-<span3><%= @issue.comments.count %> Comments</span3>
-<%= render "comments/form" %>
-<%= render @issue.comments.order(id: :desc) %>
+<div>
+  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= show()><span3><%= @issue.comments.count %> Comments</span3></button>
+</div>
+
+<div id = "comments" class="hidden-inputs">
+  <%= render "comments/form" %>
+  <%= render @issue.comments.order(id: :desc) %>
+</div>
 
 <div>
   <%= link_to "Edit this issue", edit_issue_path(@issue), class:"btn btn-success4" %> |
@@ -13,3 +18,18 @@
   <%= button_to "Destroy this issue", @issue, method: :delete,  class:"btn btn-success3" %>
   <br>
 </div>
+
+  <script>
+    let message = true;
+    function show() {
+      if (message === false) {
+        document.getElementById("comments").classList.remove("hidden-comments");
+        message = true;
+      }
+      else {
+        document.getElementById("comments").classList.add("hidden-comments");
+        message = false;
+      }
+    }
+
+  </script>

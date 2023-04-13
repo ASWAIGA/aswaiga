@@ -446,3 +446,33 @@ span3 {
   color: #008aa8;
   text-decoration: none;
 }
+
+.hidden-comments {
+  display: none;
+}
+
+.btn-success10 {
+  color: #2e3440;
+  transition: all .3s linear;
+  display: inline;
+  text-align: left;
+}
+
+.btn-success10 .btn-success10.active {
+  border-bottom: 3px solid #434456;
+  color: #434456;
+}
+
+.btn-success10:hover {
+  display: inline;
+}
+
+span3:hover {
+  font-family: Ubuntu-Medium,Arial,Helvetica,sans-serif;
+  transition: all .1s linear;
+  color: #25a28c;
+  display: inline-block;
+  font-family: Helvetica;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
