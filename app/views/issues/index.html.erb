@@ -19,9 +19,6 @@
                  <img src="/assets/default-user.jpg" style="height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%">
                <%end%>
               <% end %>
-              <p>
-                <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success-left" %>
-              </p>
             <% else %>
               <%= button_to "Log in", user_google_oauth2_omniauth_authorize_path, data: {turbo: "false"}, method: :post, class:"btn btn-success-left" %>
             <% end %>
