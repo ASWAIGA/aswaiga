@@ -26,27 +26,40 @@
             <% end %>
     </div>
     <div id= "contenidor">
+
+
+
       <p>
-        <div class="opciones issue">
-          <button class="btn-filter" id="filters-button">
-            <img class="filters-icon" src="/img/Icon-filter.png" alt="Filters" style=""width: 50px;"">
-            <span>Filters</span>
+      <div class= "left-filters">
+        <%= form_tag issues_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], placeholder: "subject or reference"%>
+          <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon1">
+
+          <%= select_tag :sort, options_for_select([["Order by STATUS", "status_asc"], ["Order by PRIORITY", "priority_asc"], ["Order by ASSIGNED TO", "assign_to_asc"]]), class:"box2"%>
+          <button class="btn-filter2" id="filters-button">
+            <img class="sort-icon" src="https://cdn-icons-png.flaticon.com/512/162/162735.png" alt="submit" style=""width: 10px;"">
           </button>
+                      <p></p>
+          <%= text_field_tag :filter_assign_to, params[:filter_assign_to], placeholder: "Assinged to"%>
+          <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon2">
+                        <p></p>
+          <%= select_tag :filter_status, options_for_select([["New", "new"], ["In progress", "in_progress"], ["Ready for test", "ready_for_test"], ["Closed", "closed"], ["Needs info", "needs_info"], ["Rejected", "rejected"], ["Postponed", "postponed"]], params[:filter_status]), include_blank: true %>
+            <button class="btn-filter2" id="filters-button">
+              <img class="filters-icon1" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
+              <div class= "filter-text1"> <span style="display: inline-block;">Select a Status</span> </div>
+            </button>
+                        <p></p>
+        <%= select_tag :filter_priority, options_for_select([["Low", "low"], ["Normal", "normal"], ["High", "high"]], params[:filter_status]), include_blank: true %>
+            <button class="btn-filter2" id="filters-button">
+              <img class="filters-icon2" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
+                <div class= "filter-text2"> <span style="display: inline-block;" >Select a Priority</span> </div>
+            </button>
+
+           <% end %>
         </div>
-      </p>
-      <p>
-        <div class= "search-container">
-          <input type="text" class="tg-input-search" placeholder="subject or reference">
-          <img src="/img/Icon-search.png" alt="icono" class="search-icon">
-        </div>
-      </p>
-      <p>
-        <label class= "tag-switch">
-            <input type="checkbox" id="mySwitch" onclick="myFunction()" class="checkbox-tags">
-            <span class="slider"></span>
-        </label>
-      </p>
-      <span style="display: inline-block; margin-left: 50px;">Tags</span>
+        </p>
+
+
       <%= link_to "+ NEW ISSUE", new_issue_path, class:"btn btn-success" %>
       <button class="boton-new-bulk" onclick= show()>
         <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
@@ -65,7 +78,9 @@ function myFunction() {
 </script>
 
 
-<div id="issues">
+
+<% if @issues.any? %>
+<div id="issues_table">
   <table class="table table-striped table-borderless">
     <thead>
       <tr>
@@ -117,6 +132,10 @@ function myFunction() {
       </tr>
     </tbody>
     <% end %>
+    <% else %>
+      <div class= "text-no-issues-found"> <span style="display: inline-block;" >No issues found ☹ </span> </div>
+    <% end %>
+
   </table>
   <br>
   <div id ="bulkinsert" class="hidden-bulk">

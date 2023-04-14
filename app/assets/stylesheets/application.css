@@ -50,6 +50,8 @@ label {
   border: 0;
   border-radius: 4px;
   font: inherit;
+  margin-top: 40px;
+  height: 30px;
 }
 
 .btn-filter:hover {
@@ -59,9 +61,32 @@ label {
   display: flex;
 }
 
-#filters-button img {
-  width: 20px;
-  height: 20px;
+ .btn-filter2 {
+  transition: all .3s linear;
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: #f9f9fb;
+  color: #008aa8;
+  padding: 0.3rem 0.2rem;
+  text-transform: none;
+  justify-content: center;
+  line-height: initial;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  transform: translate(3px, 3px);
+  width: 35px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.btn-filter2:hover {
+  background-color: #D6DBDF;
+  border-color: transparent;
+  align-items: center;
 }
 
 .btn-success {
@@ -200,16 +225,10 @@ label {
   display: flex;
 }
 
-#tag-button img {
-  width: 20px;
-  height: 20px;
-}
-
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: right;
-  margin-left: 1rem;
+  margin-right: 10px;
 }
 
 .tg-input-search {
@@ -230,19 +249,47 @@ label {
   border: 2px solid #008aa8;
 }
 
-.search-icon {
+.search-icon1 {
   position: absolute;
   align-items: center;
-  transform: translate(-10px, 0px);
+  transform: translate(-30px, 5px);
 }
 
-.filters-icon {
+.search-icon2 {
+  position: absolute;
+  align-items: center;
+  transform: translate(-26px, 3px);
+}
+
+.filters-icon1 {
   width: 70%;
   align-items: center;
-  transform: translate(-5px, 0px);
+  transform: translate(113px, 0px);
+  margin-right: 2px;
+}
+
+.filters-icon2 {
+  width: 70%;
+  align-items: center;
+  transform: translate(122px, 0px);
+  margin-right: 2px;
+}
+
+.sort-icon {
+  width: 60%;
+  align-items: center;
+  transform: translate(1px, 2px);
+}
+
+.filetrs-icon:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
 }
 
 .tag-switch {
+  margin-left: 5px;
   position: absolute;
   align-items: center;
   width: 35px;
@@ -271,7 +318,7 @@ label {
 .checkbox-tags {
   width: 10px;
   height: 10px;
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .slider:before {
@@ -326,6 +373,50 @@ input:checked + .slider:before {
   height: auto;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  color: #212529;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown-toggle:focus,
+.dropdown-toggle:hover {
+  background-color: #e9ecef;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dropdown-menu input[type="checkbox"] {
+  margin-right: 5px;
+}
+
 #contenidor {
   width: 250%;
   height: 50px;
@@ -350,6 +441,33 @@ h3 {
   display: inline;
 }
 
+#box-content {
+  display: none;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#box-toggle {
+  background-color: #ddd;
+  border: none;
+  padding: 10px;
+}
+
+#box-container {
+  margin: 10px;
+}
+
+#filters-button:focus + #box-content {
+  display: block;
+}
+
+
+.leftside, .rightside {
+  width: 100%;
+  height: 100vh;
+}
+
 h4 {
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
@@ -360,6 +478,42 @@ h4 {
 .leftside, .rightside {
   width: 100%;
   height: 100vh;
+}
+
+.left-filters{
+    width: 15%;
+    min-width: 350px;
+    height: available;
+    min-height: 300px;
+    float: left;
+    background-color: white;
+    border-collapse: collapse;
+    margin-top:300px;
+}
+
+.filter-text1 {
+  text-align: right;
+  margin-left: 120px;
+}
+
+.filter-text2 {
+  text-align: right;
+  margin-left: 130px;
+}
+
+.text-no-issues-found {
+  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+  color: #black;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 120px;
+  margin-top: 275px;
+}
+
+#issues_table{
+    margin-top:10px;
+    margin-left:500px;
 }
 
 .box {
@@ -420,6 +574,22 @@ h4 {
 .clock-icon {
   width: 15px;
   height: 15px;
+}
+
+.box2 {
+  width: 175px;
+  height: 30px;
+  border: 1px solid #999;
+  font-size: 18px;
+  color: #000000;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 4px 4px #ccc;
+  margin-left: 10px;
+}
+
+.attachments_box {
+  margin-left: -11px;
 }
 
 li {
