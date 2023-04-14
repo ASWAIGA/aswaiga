@@ -27,8 +27,7 @@
     </header>
 
     <div class= "subject-container">
-          <input type="text" class="tg-input-subject" placeholder="Add the subject you want">
-          <%= form.text_field :issue %>
+          <%= form.text_field :issue, class:"tg-input-subject", placeholder: "Add the subject you want" %>
     </div>
 
     <p></p>
@@ -51,7 +50,15 @@
     <p></p>
 
     <div class= "description-container">
-      <input type="text" class="tg-input-description" placeholder="Would you be so kind as to add a short description?">
+      <%= form.text_field :description, class:"tg-input-description", placeholder: "Would you be so kind as to add a short description?"%>
+    </div>
+
+    <p></p>
+
+    <div class="attachments container">
+      <div class="field">
+        <%= form.file_field :attachments, multiple: true, class:"attachments_box"  %>
+      </div>
     </div>
 
     <p></p>

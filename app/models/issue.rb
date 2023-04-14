@@ -1,4 +1,7 @@
 class Issue < ApplicationRecord
+  has_many :comments, dependent: :destroy
+  has_many_attached :attachments
+  validates :issue, presence: true
   before_update :save_issue_version
   has_many :issue_versions
   # ...

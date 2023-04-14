@@ -3,7 +3,49 @@ class IssuesController < ApplicationController
 
   # GET /issues or /issues.json
   def index
-    @issues = Issue.all
+    # @issues = Issue.all
+    # @issues = issues.where(status: params[:status]) if params[:status].present?
+    # @issues = issues.where(priority: params[:priority]) if params[:priority].present?
+    # @issues = issues.where(assign_to: params[:assign_to]) if params[:assign_to].present?
+    # @issues = issues.where(assignee: params[:assignee]) if params[:assignee].present?
+    # @issues = issues.where(tags: params[:tags]) if params[:tags].present?
+    # @issues = issues.where(created_by: params[:created_by]) if params[:created_by].present?
+
+     @issues = Issue.all
+     if params[:search]
+       if params[:search].present?
+        @issues = @issues.where("issue LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      else
+        @issues = @issues
+      end
+    end
+
+     if params[:sort].present?
+        case params[:sort]
+        when 'status_asc'
+          @issues = @issues.order(status: :asc)
+        when 'priority_asc'
+          @issues = @issues.order(priority: :asc)
+        when 'assign_to_asc'
+          @issues = @issues.order(assign_to: :asc)
+        end
+      end
+
+      if params[:filter_status]
+          if params[:filter_status]
+            @issues = @issues.where("status LIKE ?", "%#{params[:filter_status]}%")
+          end
+      end
+      if params[:filter_priority]
+          if params[:filter_priority]
+            @issues = @issues.where("priority LIKE ?", "%#{params[:filter_priority]}%")
+          end
+      end
+      if params[:filter_assign_to]
+       if params[:filter_assign_to].present?
+        @issues = @issues.where("assign_to LIKE ?", "%#{params[:filter_assign_to]}%")
+       end
+      end
   end
 
   # GET /issues/1 or /issues/1.json
@@ -32,7 +74,6 @@ class IssuesController < ApplicationController
   # POST /issues or /issues.json
   def create
     @issue = Issue.new(issue_params)
-
     respond_to do |format|
       if params[:block_clicked] == 'true'
         if @issue.update(block_status: true)
@@ -96,6 +137,7 @@ end
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_issue
@@ -104,6 +146,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status)
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status, :description, attachments: [])
     end
 end
