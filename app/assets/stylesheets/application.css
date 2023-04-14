@@ -405,6 +405,20 @@ h4 {
   vertical-align: top;
 }
 
+.container-popup #input-block {
+  width: 40em;
+  height: 10em;
+  resize: none;
+  text-align: left;
+  padding-bottom: 7em;
+  padding-left: 10px;
+  overflow: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border: 2px solid #d8dee9;
+  color: #4c566a;
+}
+
 .container-popup #input2 {
   width: 40em;
   height: 10em;
@@ -545,3 +559,5 @@ span3:hover {
   margin-bottom: 1rem;
   font-weight: bold;
 }
+
+

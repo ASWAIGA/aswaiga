@@ -1,13 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @issue %>
-<div>
-  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= show()><span3><%= @issue.comments.count %> Comments</span3></button>
-</div>
+<% if @issue.comments %>
+  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= show()><span3>
+    <%= @issue.comments.count %> Comments</span3></button>
+<% end %>
 
 <div id = "comments" class="hidden-inputs">
   <%= render "comments/form" %>
+  <% if @issue.comments %>
   <%= render @issue.comments.order(id: :desc) %>
+  <% end %>
 </div>
 
 <div>

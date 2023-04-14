@@ -33,6 +33,15 @@
 
     <p></p>
 
+    <% if @issue.block_status %>
+    <div id="block-reason" style="background-color: #ff6969; padding-left: 5px;">
+      <span> <img src="/img/Icon-block-white.png" style="padding-right: 5px; width: 20px; height: 15px;"/> <span style="color: #ffffff;"> Blocked </span>
+       <span style="padding-left: 5px; color: #ffcfcf;"><%= @issue.reason_block %></span></span>
+      </span>
+    </div>
+    <% end %>
+    <p></p>
+
     <div class="tag issue">
           <button class="btn-tag" id="tag-button" type="button">
             <span>Add tag +</span>
@@ -48,7 +57,11 @@
     <p></p>
 
     <div>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag :unblock_clicked, '' %>
+      <%= hidden_field_tag :block_clicked, '' %>
       <%= form.submit %>
+      <script><%= @versions = @issue.issue_versions.order(created_at: :desc) %></script>
     </div>
 
     <p></p>
@@ -62,6 +75,57 @@
 <div class= "col no-gutters">
 <div class= "rightside">
   <header class= "newissue-cabecera-derecha">
+
+    <div> <button type="button" class="btn-filter" style="color: #545454" onclick= showandhideActivities() >
+  <% count = @versions.count { |version| version.attribute_name != "updated_at" } %>
+  <%= count %> Activities
+  </button>
+  <div id= "activities" class= "hidden-inputs">
+    <% if @versions.present? %>
+      <table>
+        <tbody>
+          <% @versions.each do |version| %>
+            <% if version.attribute_name != "updated_at" %>
+              <tr>
+                <td style="background-color: #dedede; border-top: 1px solid #ccc"><%= version.attribute_name %></td>
+                <td style="padding-left: 20px; border-top: 1px solid #ccc">
+                  <% if version.old_value === "t" %>
+                    true
+                  <% elsif version.old_value === "f" %>
+                    false
+                  <% elsif !version.old_value %>
+                    not set
+                  <% else %>
+                    <%= version.old_value %>
+                  <% end %>
+                </td>
+                <td style="padding-left: 20px; padding-right: 20px; border-top: 1px solid #ccc">></td>
+                <td style="padding-right: 20px; border-top: 1px solid #ccc">
+                  <% if version.new_value === "t" %>
+                    true
+                  <% elsif version.new_value === "f" %>
+                    false
+                  <% elsif !version.new_value %>
+                    not set
+                  <% else %>
+                    <%= version.new_value %>
+                  <% end %>
+                </td>
+                <td style="color:#a9a9a9; border-top: 1px solid #ccc">
+                  <% if version.created_at_change %>
+                  <%= version.created_at_change.strftime('%d %b %Y %H:%M') %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There's no activities.</p>
+    <% end %>
+  </div>
+  </div>
 
   <p style="text-align:right;"><%= link_to "X", issues_path, class:"btn btn-success3" %></p>
   <div>
@@ -117,6 +181,35 @@
     </div>
   </div>
 
+  <p></p>
+
+  <% if @issue.block_status %>
+    <button id="btn-block-present" class="btn-filter" style="background-color:#ff6969; width: 40px; height: 40px;" onclick='
+    document.querySelector("input[name=unblock_clicked]").value = "true"; document.querySelector("input[name=block_clicked]").value = "false";'>
+      <script>
+        document.getElementById("block-reason").classList.remove("hidden-inputs");
+        document.getElementById("block-reason").classList.add("popup-effect-block");
+        let buttonColorblock = "#ff6969";
+        localStorage.setItem("buttonColorblock", buttonColorblock);
+      </script>
+      <img src="/img/Icon-block.png" style="width: 100%; height: 100%;"/>
+    </button>
+  <% else %>
+    <button id="btn-block" class="btn-filter" style="width: 40px; height: 40px;" type="button" onclick="document.getElementById('inputs-block').classList.remove('hidden-inputs'); document.getElementById('inputs-block').classList.add('popup-effect');">
+      <img src="/img/Icon-block.png" style="width: 100%; height: 100%;" />
+    </button>
+
+  <% end %>
+  <div id="inputs-block" class="hidden-inputs">
+    <p style="text-align:right;"><button style="text-align:right;" type="button" class="btn btn-success3" onclick= hide() >X</button></p>
+    <div class="container-popup">
+      <h4 class="title">Blocking issue</h4>
+      <%= form.text_field :reason_block, id: "input-block", type: "text", placeholder: (@issue.reason_block? ? @issue.reason_block : "Please explain the reason") %>
+      <p></p>
+      <%= form.submit "SAVE", class: "btn btn-success2", id: "button-save", onclick: "document.querySelector('input[name=block_clicked]').value = 'true', document.querySelector('input[name=unblock_clicked]').value = 'false'" %>
+    </div>
+  </div>
+
   <script>
   function show() {
     document.getElementById("inputs").classList.remove("hidden-inputs");
@@ -126,7 +219,21 @@
   function hide() {
     document.getElementById("inputs").classList.add("hidden-inputs");
     document.getElementById("inputs").classList.remove("popup-effect");
+    document.getElementById("inputs-block").classList.add("hidden-inputs");
+    document.getElementById("inputs-block").classList.remove("popup-effect");
   }
+
+  function showandhideActivities() {
+    if (document.getElementById("activities").classList == "hidden-inputs") {
+      document.getElementById("activities").classList.add("activities-effect");
+      document.getElementById("activities").classList.remove("hidden-inputs");
+    }
+    else {
+      document.getElementById("activities").classList.add("hidden-inputs");
+      document.getElementById("activities").classList.remove("activities-effect");
+    }
+  }
+
 
   document.addEventListener("DOMContentLoaded", function() {
     flatpickr("#input1", {

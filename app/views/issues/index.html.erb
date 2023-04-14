@@ -80,11 +80,12 @@ function myFunction() {
     </thead>
     <% @issues.each do |issue| %>
     <tbody>
-      <tr>
+        <tr id="issue-<%= issue.id %>" <% if issue.block_status %>style="background-color: #ffdfdf;" <% end %>>
         <td><%= issue.tipus %></td>
         <td><%= issue.severity %></td>
         <td><%= issue.priority %></td>
-        <td><%= link_to issue.issue, issue%> <img id="clockid-<%= issue.id %>" class="clock-icon" src="" alt=""></td>
+        <td><%= link_to issue.issue, issue%> <img id="clockid-<%= issue.id %>" class="clock-icon" src="" alt="">
+        <img id="blockid-<%= issue.id %>" class="clock-icon" src="" alt=""></td>
         <script>
           if (<%= issue.due_date.present?.to_json %>) {
             const dueDate = '<%= issue.due_date %>';
@@ -106,9 +107,18 @@ function myFunction() {
             }
           }
 
-          else {
+          if (<%= !issue.due_date.present?.to_json %>) {
             const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
             clock.src = "/img/Icon-no-clock.png";
+          }
+
+          if (<%= issue.block_status %>) {
+            const block = document.getElementById("blockid-" + <%= issue.id.to_s %>);
+            block.src = "/img/Icon-block-red.png";
+          }
+          if (<%= !issue.block_status %>) {
+            const clock = document.getElementById("blockid-" + <%= issue.id.to_s %>);
+            block.src = "";
           }
         </script>
         <td><%= issue.status %></td>

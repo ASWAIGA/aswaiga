@@ -1,4 +1,5 @@
-<%= form_for([@issue, @issue.comments.build]) do |f| %>
+<% comments = @issue.comments.try(:build) || Comment.new %>
+<%= form_for([@issue, comments]) do |f| %>
   <p>
     <text_area>
       <%= f.text_area :content, placeholder: "Type a new comment here" %>
