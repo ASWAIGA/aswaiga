@@ -61,7 +61,7 @@
 
 
       <%= link_to "+ NEW ISSUE", new_issue_path, class:"btn btn-success" %>
-      <button class="boton-new-bulk" onclick= show()>
+      <button class="boton-new-bulk" onclick= bulk()>
         <img class="img-new-bulk" src="/img/Icon-new-bulk-white.png"/>
       </button>
     </div>
@@ -77,11 +77,18 @@ function myFunction() {
 }
 </script>
 
-
-
 <% if @issues.any? %>
 <div id="issues_table">
   <table class="table table-striped table-borderless">
+
+    <div id ="bulkinsert" class="hidden-bulk">
+    <h10><center>New bulk insert</center></h10>
+      <%= form_tag({ action: 'create_issues_bulk' }, method: 'post') do %>
+        <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
+        <%= submit_tag "SAVE", class: "btn btn-success9" %>
+      <% end %>
+  </div>
+
     <thead>
       <tr>
         <th>TYPE</th>
@@ -138,20 +145,14 @@ function myFunction() {
 
   </table>
   <br>
-  <div id ="bulkinsert" class="hidden-bulk">
-    <h10><center>New bulk insert</center></h10>
-      <%= form_tag({ action: 'create_issues_bulk' }, method: 'post') do %>
-        <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
-        <%= submit_tag "SAVE", class: "btn btn-success9" %>
-      <% end %>
-  </div>
+
   <br>
   <br>
 </div>
 
  <script>
     let message = false;
-    function show() {
+    function bulk() {
       if (message === false) {
         document.getElementById("bulkinsert").classList.remove("hidden-bulk");
         message = true;

@@ -626,7 +626,7 @@ h10 {
 }
 
 .btn-success9 {
-  margin-left: 56rem;
+  margin-left: 41rem;
   background-color: #83eede;
   color: #2e3440;
   transition: all .3s linear;
@@ -654,9 +654,9 @@ h10 {
   border: 2px solid #d8dee9;
   border-radius: 3px;
   color: #4c566a;
-  margin-left: 19.5rem;
+  margin-left: 5rem;
   padding: 0.3rem 1rem 0.3rem 0.95rem;
-  width: 50%;
+  width: 80%;
   transition: 0.3s linear;
   max-height: 12rem;
   min-height: 15rem;

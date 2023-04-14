@@ -2,10 +2,10 @@
 
 <%= render @issue %>
 <div>
-  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= show()><span3><%= @issue.comments.count %> Comments</span3></button>
+  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= comments()><span3><%= @issue.comments.count %> Comments</span3></button>
 </div>
 
-<div id = "comments" class="hidden-inputs">
+<div id = "comments" class="hidden-comments">
   <%= render "comments/form" %>
   <%= render @issue.comments.order(id: :desc) %>
 </div>
@@ -20,8 +20,8 @@
 </div>
 
   <script>
-    let message = true;
-    function show() {
+    let message = false;
+    function comments() {
       if (message === false) {
         document.getElementById("comments").classList.remove("hidden-comments");
         message = true;
