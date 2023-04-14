@@ -1,4 +1,4 @@
-class AddDescription < ActiveRecord::Migration[7.0]
+class AddDueDateAndReasonToIssues < ActiveRecord::Migration[7.0]
   def change
     add_column :issues, :description, :string
   end

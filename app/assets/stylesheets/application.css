@@ -61,6 +61,31 @@ label {
   display: flex;
 }
 
+.btn-filter20 {
+  transition: all .3s linear;
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: #f9f9fb;
+  color: #008aa8;
+  padding: 0.5rem 0.5rem;
+  text-transform: none;
+  justify-content: center;
+  line-height: initial;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.btn-filter20:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
+}
+
  .btn-filter2 {
   transition: all .3s linear;
   font-size: 0.875rem;

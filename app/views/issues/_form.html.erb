@@ -170,7 +170,7 @@
 
   <p></p>
 
-  <button id="btn-due_date" class="btn-filter" style="width: 40px; height: 40px;" type="button" onclick= show() >
+  <button id="btn-due_date" class="btn-filter20" style="width: 40px; height: 40px;" type="button" onclick= show() >
     <img src="/img/Icon-watch.png" style="width: 100%; height: 100%;"/>
   </button>
   <div id="inputs" class="hidden-inputs">
@@ -191,7 +191,7 @@
   <p></p>
 
   <% if @issue.block_status %>
-    <button id="btn-block-present" class="btn-filter" style="background-color:#ff6969; width: 40px; height: 40px;" onclick='
+    <button id="btn-block-present" class="btn-filter20" style="background-color:#ff6969; width: 40px; height: 40px;" onclick='
     document.querySelector("input[name=unblock_clicked]").value = "true"; document.querySelector("input[name=block_clicked]").value = "false";'>
       <script>
         document.getElementById("block-reason").classList.remove("hidden-inputs");
@@ -202,7 +202,7 @@
       <img src="/img/Icon-block.png" style="width: 100%; height: 100%;"/>
     </button>
   <% else %>
-    <button id="btn-block" class="btn-filter" style="width: 40px; height: 40px;" type="button" onclick="document.getElementById('inputs-block').classList.remove('hidden-inputs'); document.getElementById('inputs-block').classList.add('popup-effect');">
+    <button id="btn-block" class="btn-filter20" style="width: 40px; height: 40px;" type="button" onclick="document.getElementById('inputs-block').classList.remove('hidden-inputs'); document.getElementById('inputs-block').classList.add('popup-effect');">
       <img src="/img/Icon-block.png" style="width: 100%; height: 100%;" />
     </button>
 

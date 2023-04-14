@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_082208) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_085000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,17 +62,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_082208) do
     t.string "tipus"
     t.string "severity"
     t.string "priority"
-    t.string "issue", null: false
+    t.string "issue"
     t.string "status"
     t.string "assign_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.date "due_date"
     t.string "reason_due_date"
-    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "reason_block"
     t.boolean "block_status"
     t.text "comments"
+    t.string "description"
   end
 
   create_table "users", force: :cascade do |t|
