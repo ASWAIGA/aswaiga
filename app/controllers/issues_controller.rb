@@ -14,7 +14,7 @@ class IssuesController < ApplicationController
      @issues = Issue.all
      if params[:search]
        if params[:search].present?
-        @issues = @issues.where("subject LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+        @issues = @issues.where("issue LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
       else
         @issues = @issues
       end
@@ -117,6 +117,6 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date)
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :description, attachments: [])
     end
 end

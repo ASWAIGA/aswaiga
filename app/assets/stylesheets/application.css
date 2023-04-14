@@ -183,12 +183,12 @@ label {
   color: #4c566a;
   margin: 0;
   padding: 0.3rem 1rem 0.3rem 0.95rem;
-  width: 100%;
+  width: 35%;
   transition: 0.3s linear;
 }
 
 .tg-input-description {
-  padding-right: 50px;
+  padding-right: 150px;
   box-sizing: border-box;
   background: #fff;
   border: 2px solid #d8dee9;
