@@ -1,6 +1,6 @@
-# fly.toml file generated for aswaiga on 2023-03-24T11:23:17Z
+# fly.toml file generated for aswaigav1 on 2023-04-14T09:25:02Z
 
-app = "aswaiga"
+app = "aswaigav1"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "mad"
