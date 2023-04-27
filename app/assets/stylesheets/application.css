@@ -312,6 +312,27 @@ select {
   margin-right: 2px;
 }
 
+.filters-icon3 {
+  width: 70%;
+  align-items: center;
+  transform: translate(122px, 0px);
+  margin-left: 25px;
+}
+
+.filters-icon4 {
+  width: 70%;
+  align-items: center;
+  transform: translate(122px, 0px);
+  margin-left: 13px;
+}
+
+.filters-icon5 {
+  width: 70%;
+  align-items: center;
+  transform: translate(122px, 0px);
+  margin-left: 34px;
+}
+
 .sort-icon {
   width: 60%;
   align-items: center;
@@ -538,6 +559,16 @@ h4 {
   margin-left: 130px;
 }
 
+.filter-text3 {
+  text-align: right;
+  margin-left: 130px;
+}
+
+.filter-text4 {
+  text-align: right;
+  margin-left: 130px;
+}
+
 .text-no-issues-found {
   font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
   color: #black;
@@ -640,7 +671,7 @@ h4 {
 }
 
 .attachments_box {
-  margin-right: 400px;
+  margin-right: 1090px;
 }
 
 li {

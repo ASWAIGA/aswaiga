@@ -168,14 +168,14 @@
 
   <p></p>
 
-  <div>
+ <div>
     <h2><%= form.label :assign_to, style: "display: block"%></h2>
-    <%= form.text_field :assign_to, class:"box"%>
+    <%= form.select :assign_to, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
   </div>
 
   <div>
     <h2><%= form.label :assignee, style: "display: block"%></h2>
-    <%= form.text_field :assignee, class:"box"%>
+     <%= form.select :assignee, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
   </div>
 
   <p></p>
