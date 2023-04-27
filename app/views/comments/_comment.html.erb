@@ -1,6 +1,12 @@
 <article>
   <p>
-    <h3>Joel Rivera Pérez</h3>
+    <h3>
+      <% if current_user && current_user.respond_to?(:full_name) %>
+        <%= current_user.full_name %>
+      <% else %>
+        User not logged
+      <% end %>
+    </h3>
     <small><%= comment.created_at.strftime("%d %b %Y %H:%M") %></small>
     <br>
     <%= comment.content %>
