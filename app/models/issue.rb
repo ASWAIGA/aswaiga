@@ -8,6 +8,8 @@ class Issue < ApplicationRecord
   validates :issue, presence: true
   before_update :save_issue_version
   has_many :issue_versions
+  #belongs_to :user, foreign_key: "created_by", primary_key: "full_name"
+  #delegate :full_name, to: :user, prefix: true, allow_nil: true
   # ...
 
   private
@@ -22,6 +24,14 @@ class Issue < ApplicationRecord
         created_at_change: Time.current
       ) if old_value != self.send(attr)
     end
+
+  #after_save :update_created_by
+
+  #def update_created_by
+  #  self.created_by = user.full_name
+  #  save
+  #end
+
   end
 
 

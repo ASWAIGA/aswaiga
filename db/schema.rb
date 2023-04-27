@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_154956) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_134520) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_154956) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "arxius", force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_arxius_on_issue_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "issue_id", null: false
@@ -58,13 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_154956) do
     t.index ["issue_id"], name: "index_issue_versions_on_issue_id"
   end
 
-  create_table "arxius", force: :cascade do |t|
-    t.integer "issue_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["issue_id"], name: "index_arxius_on_issue_id"
-  end
-
   create_table "issues", force: :cascade do |t|
     t.string "tipus"
     t.string "severity"
@@ -79,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_154956) do
     t.boolean "block_status"
     t.string "reason_block"
     t.string "description"
+    t.string "assignee"
+    t.string "created_by"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,4 +103,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_154956) do
   add_foreign_key "arxius", "issues"
   add_foreign_key "comments", "issues"
   add_foreign_key "issue_versions", "issues"
+  add_foreign_key "created_by", "users"
 end

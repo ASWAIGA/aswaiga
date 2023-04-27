@@ -28,6 +28,8 @@ class IssuesController < ApplicationController
           @issues = @issues.order(priority: :asc)
         when 'assign_to_asc'
           @issues = @issues.order(assign_to: :asc)
+        when 'assign_asc'
+          @issues = @issues.order(assignee: :asc)
         end
       end
 
@@ -44,6 +46,18 @@ class IssuesController < ApplicationController
       if params[:filter_assign_to]
        if params[:filter_assign_to].present?
         @issues = @issues.where("assign_to LIKE ?", "%#{params[:filter_assign_to]}%")
+       end
+      end
+
+      if params[:filter_assignee]
+       if params[:filter_assignee].present?
+        @issues = @issues.where("assignee LIKE ?", "%#{params[:filter_assignee]}%")
+       end
+      end
+
+      if params[:filter_created_by]
+       if params[:filter_created_by].present?
+        @issues = @issues.where("created_by LIKE ?", "%#{params[:filter_created_by]}%")
        end
       end
   end
@@ -146,6 +160,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status, :description, attachments: [])
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :assignee, :created_by, :due_date, :reason_due_date, :reason_block, :block_status, :description, attachments: [])
     end
 end

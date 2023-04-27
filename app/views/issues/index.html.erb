@@ -35,20 +35,36 @@
           <%= text_field_tag :search, params[:search], placeholder: "subject or reference"%>
           <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon1">
 
-          <%= select_tag :sort, options_for_select([["Order by STATUS", "status_asc"], ["Order by PRIORITY", "priority_asc"], ["Order by ASSIGNED TO", "assign_to_asc"]]), class:"box2"%>
+          <%= select_tag :sort, options_for_select([["Order by STATUS", "status_asc"], ["Order by PRIORITY", "priority_asc"], ["Order by ASSIGNED TO", "assign_to_asc"], ["Order by ASSIGNEE", "assignee_asc"]]), class:"box2"%>
           <button class="btn-filter2" id="filters-button">
             <img class="sort-icon" src="https://cdn-icons-png.flaticon.com/512/162/162735.png" alt="submit" style=""width: 10px;"">
           </button>
-                      <p></p>
+
+          <p></p>
+
           <%= text_field_tag :filter_assign_to, params[:filter_assign_to], placeholder: "Assinged to"%>
           <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon2">
-                        <p></p>
+
+          <p></p>
+
+          <%= text_field_tag :filter_assignee, params[:filter_assignee], placeholder: "Assingee"%>
+          <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon2">
+
+          <p></p>
+
+          <%= text_field_tag :filter_created_by, params[:filter_created_by], placeholder: "Created by"%>
+          <input type="image" src="/img/Icon-search.png" alt="Submit" class="search-icon2">
+
+          <p></p>
+
           <%= select_tag :filter_status, options_for_select([["New", "new"], ["In progress", "in_progress"], ["Ready for test", "ready_for_test"], ["Closed", "closed"], ["Needs info", "needs_info"], ["Rejected", "rejected"], ["Postponed", "postponed"]], params[:filter_status]), include_blank: true %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon1" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
               <div class= "filter-text1"> <span style="display: inline-block;">Select a Status</span> </div>
             </button>
-                        <p></p>
+
+          <p></p>
+
         <%= select_tag :filter_priority, options_for_select([["Low", "low"], ["Normal", "normal"], ["High", "high"]], params[:filter_status]), include_blank: true %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon2" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">

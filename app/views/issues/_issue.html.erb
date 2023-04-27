@@ -47,7 +47,7 @@
     <p></p>
 
     <%= form_with(model: [@issue, Arxiu.new], url: issue_arxius_path(@issue), local: true) do |form| %>
-      <%= form.file_field :file %>
+      <%= form.file_field :file%>
       <%= form.submit "Save" %>
     <% end %>
 
