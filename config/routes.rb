@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   }
   resources :issues do
     resources :comments
+    member do
+      post 'add_watcher', action: :add_watcher
+      post 'add_watchers', action: :add_watchers
+      delete 'remove_watcher/:user_id', action: :remove_watcher, as: 'remove_watcher'
+    end
   end
   resources :users
   get 'issues/index'

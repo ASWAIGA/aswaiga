@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_04_27_134520) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_181606) do
+>>>>>>> feature
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_134520) do
     t.datetime "created_at_change"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_full_name"
     t.index ["issue_id"], name: "index_issue_versions_on_issue_id"
   end
 
@@ -81,6 +86,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_134520) do
     t.string "description"
     t.string "assignee"
     t.string "created_by"
+    t.string "user_name"
+  end
+
+  create_table "issues_users", id: false, force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -147,7 +147,7 @@ function myFunction() {
 
           if (<%= !issue.due_date.present?.to_json %>) {
             const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
-            clock.src = "/img/Icon-no-clock.png";
+            clock.src = "";
           }
 
           if (<%= issue.block_status %>) {
