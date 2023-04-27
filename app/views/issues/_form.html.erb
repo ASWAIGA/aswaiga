@@ -7,7 +7,6 @@
   <% if issue.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
-
       <ul>
         <% issue.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -15,7 +14,9 @@
       </ul>
     </div>
   <% end %>
-
+  <% if current_user && current_user.respond_to?(:full_name) %>
+  <%= form.text_field :user_name, placeholder: 'User name', value: current_user.full_name, hidden: true %>
+  <% end %>
   <p style="color: green"><%= notice %></p>
 
 <div class="row no-gutters">
@@ -71,20 +72,8 @@
       <script><%= @versions = @issue.issue_versions.order(created_at: :desc) %></script>
     </div>
 
-    <p></p>
-
-    <%= link_to "BACK TO ISSUES", issues_path, class:"btn btn-success3" %>
-
-    </header>
-  </div>
-</div>
-
-<div class= "col no-gutters">
-<div class= "rightside">
-  <header class= "newissue-cabecera-derecha">
-
     <div> <button type="button" class="btn-filter" style="color: #545454" onclick= showandhideActivities() >
-  <% count = @versions.count { |version| version.attribute_name != "updated_at" } %>
+  <% count = @versions.count { |version| version.attribute_name != "updated_at" && version.attribute_name != "user_name" } %>
   <%= count %> Activities
   </button>
   <div id= "activities" class= "hidden-inputs">
@@ -92,7 +81,7 @@
       <table>
         <tbody>
           <% @versions.each do |version| %>
-            <% if version.attribute_name != "updated_at" %>
+            <% unless version.attribute_name.in?(["updated_at", "user_name"]) %>
               <tr>
                 <td style="background-color: #dedede; border-top: 1px solid #ccc"><%= version.attribute_name %></td>
                 <td style="padding-left: 20px; border-top: 1px solid #ccc">
@@ -100,8 +89,11 @@
                     true
                   <% elsif version.old_value === "f" %>
                     false
-                  <% elsif !version.old_value %>
+                  <% elsif version.old_value.blank? %>
                     not set
+                  <% elsif version.attribute_name == "due_date" %>
+                    <% old_value = DateTime.strptime(version.old_value, "%Y-%m-%d") %>
+                    <%= old_value.strftime('%d %b %Y') %>
                   <% else %>
                     <%= version.old_value %>
                   <% end %>
@@ -112,8 +104,11 @@
                     true
                   <% elsif version.new_value === "f" %>
                     false
-                  <% elsif !version.new_value %>
+                  <% elsif version.new_value.blank? %>
                     not set
+                  <% elsif version.attribute_name == "due_date" %>
+                    <% new_value = DateTime.strptime(version.new_value, "%Y-%m-%d") %>
+                    <%= new_value.strftime('%d %b %Y') %>
                   <% else %>
                     <%= version.new_value %>
                   <% end %>
@@ -121,6 +116,11 @@
                 <td style="color:#a9a9a9; border-top: 1px solid #ccc">
                   <% if version.created_at_change %>
                   <%= version.created_at_change.strftime('%d %b %Y %H:%M') %>
+                  <% end %>
+                  <% if version.user_full_name %>
+                  <%= version.user_full_name %>
+                  <% else %>
+                  User not logged
                   <% end %>
                 </td>
               </tr>
@@ -133,6 +133,18 @@
     <% end %>
   </div>
   </div>
+
+    <p></p>
+
+    <%= link_to "BACK TO ISSUES", issues_path, class:"btn btn-success3" %>
+
+    </header>
+  </div>
+</div>
+
+<div class= "col no-gutters">
+<div class= "rightside">
+  <header class= "newissue-cabecera-derecha">
 
   <p style="text-align:right;"><%= link_to "X", issues_path, class:"btn btn-success3" %></p>
   <div>
