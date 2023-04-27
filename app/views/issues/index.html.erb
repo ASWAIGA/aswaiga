@@ -42,7 +42,7 @@
 
           <p></p>
 
-          <%=select_tag :filter_assign_to, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
+          <%=select_tag :filter_assign_to, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }, params[:filter_assign_to]) , include_blank: true %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon5" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
               <div class= "filter-text4"> <span style="display: inline-block;">Filter by Assigned to</span> </div>
@@ -50,7 +50,7 @@
 
             <p></p>
 
-            <%=select_tag :filter_assignee, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
+            <%=select_tag :filter_assignee, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }, params[:filter_assignee]), include_blank: true  %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon4" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
               <div class= "filter-text4"> <span style="display: inline-block;">Filter by Assignee</span> </div>
@@ -58,7 +58,7 @@
 
           <p></p>
 
-          <%=select_tag :filter_created_by, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
+          <%=select_tag :filter_created_by, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }, params[:filter_created_by]), include_blank: true  %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon3" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
               <div class= "filter-text3"> <span style="display: inline-block;">Filter by Created by</span> </div>
@@ -74,7 +74,7 @@
 
           <p></p>
 
-        <%= select_tag :filter_priority, options_for_select([["Low", "low"], ["Normal", "normal"], ["High", "high"]], params[:filter_status]), include_blank: true %>
+        <%= select_tag :filter_priority, options_for_select([["Low", "low"], ["Normal", "normal"], ["High", "high"]], params[:filter_priority]), include_blank: true %>
             <button class="btn-filter2" id="filters-button">
               <img class="filters-icon2" src="https://cdn-icons-png.flaticon.com/512/1721/1721936.png" alt="submit" style=""width: 10px;"">
                 <div class= "filter-text2"> <span style="display: inline-block;" >Select a Priority</span> </div>
