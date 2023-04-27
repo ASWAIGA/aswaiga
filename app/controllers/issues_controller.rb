@@ -108,6 +108,6 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :subject, :description, attachments: [])
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :subject, :description)
     end
 end

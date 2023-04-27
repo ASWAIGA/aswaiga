@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   root 'issues#index'
 
-  put '/issues/:id/delete_attachment' => "issues#delete_attachment", as: :delete_attachment
+  #put '/issues/:id/delete_attachment' => "issues#delete_attachment", as: :delete_attachment
+
+  resources :issues do
+    resources :arxius, only: [:create, :destroy]
+  end
 
 end
