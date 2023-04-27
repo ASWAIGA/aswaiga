@@ -5,7 +5,7 @@ class Issue < ApplicationRecord
   before_update :save_issue_version
   has_many :issue_versions
   # ...
-
+  has_and_belongs_to_many :watchers, class_name: 'User'
   private
 
   def save_issue_version

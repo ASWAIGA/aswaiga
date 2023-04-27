@@ -137,6 +137,29 @@ end
     end
   end
 
+  def add_watcher
+    @issue = Issue.find(params[:id])
+    @user = current_user
+    @issue.watchers << @user
+    redirect_to @issue
+  end
+
+  def add_watchers
+    @issue = Issue.find(params[:id])
+    if params[:user_ids].present?
+      @users = User.where(id: params[:user_ids])
+      @issue.watchers << @users
+    end
+    redirect_to @issue
+  end
+
+
+  def remove_watcher
+  @issue = Issue.find(params[:id])
+  @user = User.find(params[:user_id])
+  @issue.watchers.delete(@user)
+  redirect_to @issue
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

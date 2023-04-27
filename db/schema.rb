@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_14_101755) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_105046) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,6 +72,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_101755) do
     t.boolean "block_status"
     t.string "reason_block"
     t.string "description"
+  end
+
+  create_table "issues_users", id: false, force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
