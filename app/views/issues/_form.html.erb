@@ -54,15 +54,7 @@
       <%= form.text_field :description, class:"tg-input-description", placeholder: "Would you be so kind as to add a short description?"%>
     </div>
 
-    <p></p>
-
-    <div class="attachments container">
-      <div class="field">
-        <%= form.file_field :attachments, multiple: true, class:"attachments_box"  %>
-      </div>
-    </div>
-
-    <p></p>
+     <p></p>
 
     <div>
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -149,35 +141,41 @@
   <p style="text-align:right;"><%= link_to "X", issues_path, class:"btn btn-success3" %></p>
   <div>
     <h2> <%= form.label :status, style: "display: block" %> </h2>
-    <%= form.text_field :status, class:"box"%>
+    <%= form.select(:status, options_for_select([['New','New'],['In progress','In progress'],['Ready for test','Ready for test'],['Closed','Closed'],['Needs info','Needs info'],['Rejected','Rejected'],['Postponed','Postponed']]))%>
   </div>
 
   <p></p>
 
+
   <div>
     <h2><%= form.label :tipus, style: "display: block" %></h2>
-    <%= form.text_field :tipus, class:"box"%>
+    <%= form.select(:tipus, options_for_select([['Bug','Bug'],['Question','Question'],['Enhancement','Enhancement']]))%>
   </div>
 
   <p></p>
 
   <div>
     <h2><%= form.label :severity, style: "display: block" %></h2>
-    <%= form.text_field :severity, class:"box"%>
+     <%= form.select(:severity, options_for_select([['Wishlist','Wishlist'],['Minor','Minor'],['Normal','Normal'],['Important','Important'],['Critical','Critical']]))%>
   </div>
 
   <p></p>
 
   <div>
     <h2><%= form.label :priority, style: "display: block" %></h2>
-    <%= form.text_field :priority, class:"box"%>
+     <%= form.select(:priority, options_for_select([['Low','Low'],['Normal','Normal'],['High','High']]))%>
   </div>
 
   <p></p>
 
-  <div>
+ <div>
     <h2><%= form.label :assign_to, style: "display: block"%></h2>
-    <%= form.text_field :assign_to, class:"box"%>
+    <%= form.select :assign_to, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
+  </div>
+
+  <div>
+    <h2><%= form.label :assignee, style: "display: block"%></h2>
+     <%= form.select :assignee, options_for_select(User.all.map{ |u| [u.full_name, u.full_name] }), include_blank: true %>
   </div>
 
   <p></p>

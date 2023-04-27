@@ -28,6 +28,10 @@ class IssuesController < ApplicationController
           @issues = @issues.order(priority: :asc)
         when 'assign_to_asc'
           @issues = @issues.order(assign_to: :asc)
+        when 'assignee_asc'
+          @issues = @issues.order(assignee: :asc)
+        when 'created_by_asc'
+          @issues = @issues.order(created_by: :asc)
         end
       end
 
@@ -46,6 +50,18 @@ class IssuesController < ApplicationController
         @issues = @issues.where("assign_to LIKE ?", "%#{params[:filter_assign_to]}%")
        end
       end
+
+      if params[:filter_assignee]
+       if params[:filter_assignee].present?
+        @issues = @issues.where("assignee LIKE ?", "%#{params[:filter_assignee]}%")
+       end
+      end
+
+      if params[:filter_created_by]
+       if params[:filter_created_by].present?
+        @issues = @issues.where("created_by LIKE ?", "%#{params[:filter_created_by]}%")
+       end
+      end
   end
 
   # GET /issues/1 or /issues/1.json
@@ -56,6 +72,9 @@ class IssuesController < ApplicationController
   # GET /issues/new
   def new
     @issue = Issue.new
+    if current_user
+      @issue.created_by = current_user.full_name
+    end
   end
 
   # GET /issues/1/edit
@@ -74,6 +93,9 @@ class IssuesController < ApplicationController
   # POST /issues or /issues.json
   def create
     @issue = Issue.new(issue_params)
+    if current_user
+      @issue.created_by = current_user.full_name
+    end
     respond_to do |format|
       if params[:block_clicked] == 'true'
         if @issue.update(block_status: true)
@@ -169,6 +191,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status, :user_name, :description, attachments: [])
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :assignee, :created_by, :due_date, :reason_due_date, :reason_block, :block_status, :user_name, :description, attachments: [])
     end
 end
