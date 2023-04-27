@@ -15,8 +15,10 @@ class Issue < ApplicationRecord
         attribute_name: attr,
         old_value: old_value,
         new_value: self.send(attr),
-        created_at_change: Time.current
+        created_at_change: Time.current,
+        user_full_name: self.user_name,
       ) if old_value != self.send(attr)
     end
   end
 end
+
