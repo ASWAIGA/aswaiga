@@ -1,0 +1,9 @@
+<% comments = @issue.comments.try(:build) || Comment.new %>
+<%= form_for([@issue, comments]) do |f| %>
+  <p>
+    <text_area>
+      <%= f.text_area :content, placeholder: "Type a new comment here" %>
+      <%= f.submit "Publica", class:"btn btn-success4" %>
+    </text_area>
+  </p>
+<% end %>

@@ -1,22 +1,37 @@
 <p style="color: green"><%= notice %></p>
 
+<%= render @issue %>
+<div>
+  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= comments()><span3><%= @issue.comments.count %> Comments</span3></button>
+</div>
 
-  <div class="row no-gutters">
-    <div class="col no-gutters">
-      <div class= "leftside">
-        <header class= "newissue-cabecera-izquierda">
-        <%= link_to "Edit this issue", edit_issue_path(@issue) %> |
-        <%= link_to "Back to issues", issues_path %>
-        <p></p>
+<div id = "comments" class="hidden-comments">
+  <%= render "comments/form" %>
+  <% if @issue.comments %>
+  <%= render @issue.comments.order(id: :desc) %>
+  <% end %>
+</div>
 
-        <%= button_to "Destroy this issue", @issue, method: :delete %>
+<div>
+  <%= link_to "Edit this issue", edit_issue_path(@issue), class:"btn btn-success4" %> |
+  <%= link_to "Back to issues", issues_path, class:"btn btn-success2" %>
+  <br>
+  <br>
+  <%= button_to "Destroy this issue", @issue, method: :delete,  class:"btn btn-success3" %>
+  <br>
+</div>
 
-        </div>
-      </div>
+  <script>
+    let message = false;
+    function comments() {
+      if (message === false) {
+        document.getElementById("comments").classList.remove("hidden-comments");
+        message = true;
+      }
+      else {
+        document.getElementById("comments").classList.add("hidden-comments");
+        message = false;
+      }
+    }
 
-      <div class= "col no-gutters">
-        <div class= "rightside">
-          <%= render @issue %>
-        </div>
-      </div>
-    </div>
+  </script>

@@ -13,6 +13,7 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.4"
 gem "bootsnap",        "1.12.0", require: false
 
+
 group :development, :test do
   gem "sqlite3", "1.4.2"
   gem "debug",   "1.5.0", platforms: %i[ mri mingw x64_mingw ]
@@ -32,7 +33,13 @@ group :production do
   gem "pg", "1.3.5"
 end
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
 # Uncomment the following line if you're running Rails
 # on a native Windows system:
 # gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "dockerfile-rails", ">= 1.2", :group => :development

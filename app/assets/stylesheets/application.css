@@ -22,7 +22,7 @@ h1 {
   font-weight: bold;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  }
+}
 
 label {
   margin: 0;
@@ -38,7 +38,7 @@ label {
   transition: all .3s linear;
   font-size: 0.875rem;
   align-items: center;
-  background-color: #f9f9fb;
+  background-color: #e9eff1;
   color: #008aa8;
   padding: 0.5rem 0.5rem;
   text-transform: none;
@@ -55,6 +55,31 @@ label {
 }
 
 .btn-filter:hover {
+  background-color: #dedede;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
+}
+
+.btn-filter20 {
+  transition: all .3s linear;
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: #f9f9fb;
+  color: #008aa8;
+  padding: 0.5rem 0.5rem;
+  text-transform: none;
+  justify-content: center;
+  line-height: initial;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-flex;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.btn-filter20:hover {
   background-color: #dedede;
   border-color: transparent;
   align-items: center;
@@ -90,13 +115,26 @@ label {
 }
 
 .btn-success {
-  margin-left: 45rem;
+  right: 20px;
+  margin-right: 7em;
+  position: absolute;
   background-color: #83eede;
   color: #2e3440;
   transition: all .3s linear;
   border-color: transparent;
   align-items: center;
   display: flex;
+}
+
+.btn-success-left {
+  display: inline;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
 }
 
 .btn-success:hover {
@@ -143,8 +181,18 @@ label {
   display: inline;
 }
 
-.btn-success3:active {
-  background-color: #CD5C5C;
+.btn-success4 {
+  margin-left: 0rem;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+  display: inline;
+}
+
+.btn-success4:hover {
+  background-color: #000000;
   color: #ffffff ;
   border-color: transparent;
   align-items: center;
@@ -165,14 +213,14 @@ label {
 }
 
 .tg-input-description {
-  padding-right: 50px;
+  padding-right: 150px;
   box-sizing: border-box;
   background: #fff;
   border: 2px solid #d8dee9;
   border-radius: 3px;
   color: #4c566a;
   margin: 0;
-  padding: 0.3rem 7rem 15rem 0.8rem;
+  padding: 0.3rem 7rem 7rem 0.8rem;
   width: 78%;
   transition: 0.3s linear;
 }
@@ -325,16 +373,17 @@ input:checked + .slider:before {
 }
 
 .boton-new-bulk {
+  right: 20px;
+  margin-right: 4em;
+  position: absolute;
   width: 40px;
   height: 40px;
   border-radius: 10%;
-  display: inline-block;
   background-color: #9e9e9e;
   border: none;
   cursor: pointer;
   align-items: center;
   transition: all .2s linear;
-  transform: translate(25px, 0px);
 }
 
 .boton-new-bulk:hover{
@@ -410,6 +459,13 @@ h2 {
   margin-bottom: 0.2rem;
 }
 
+h3 {
+  color: #008aa8;
+  font-size: 16px;
+  font-weight: normal;
+  display: inline;
+}
+
 #box-content {
   display: none;
   background-color: #eee;
@@ -437,12 +493,16 @@ h2 {
   height: 100vh;
 }
 
-.leftside {
-
+h4 {
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  color: #2e3440;
+  font-weight: 400;
 }
 
-.rightside {
-
+.leftside, .rightside {
+  width: 100%;
+  height: 100vh;
 }
 
 .left-filters{
@@ -492,6 +552,69 @@ h2 {
   box-shadow: 4px 4px #ccc;
 }
 
+.hidden-inputs {
+  display: none;
+}
+
+.popup-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  z-index: 9999;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+}
+
+.container-popup {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-popup #input1 {
+  width: 40em;
+  height: 2em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.container-popup #input-block {
+  width: 40em;
+  height: 10em;
+  resize: none;
+  text-align: left;
+  padding-bottom: 7em;
+  padding-left: 10px;
+  overflow: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border: 2px solid #d8dee9;
+  color: #4c566a;
+}
+
+.container-popup #input2 {
+  width: 40em;
+  height: 10em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.container-popup #button-save {
+  width: 40em;
+  height: 3em;
+}
+
+.clock-icon {
+  width: 15px;
+  height: 15px;
+}
+
 .box2 {
   width: 175px;
   height: 30px;
@@ -531,3 +654,105 @@ li {
       opacity: 0;
     }
   }
+
+h10 {
+  font-size: 1.4rem;
+  font-family: Ubuntu-Regular,Arial,Helvetica,sans-serif;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: #2e3440;
+  font-weight: 400;
+}
+
+.btn-success9 {
+  margin-left: 41rem;
+  background-color: #83eede;
+  color: #2e3440;
+  transition: all .3s linear;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
+}
+
+.btn-success9:hover {
+  background-color: #1d8fad;
+  color: #ffffff;
+  border-color: transparent;
+  align-items: center;
+  display: flex;
+}
+
+.hidden-bulk {
+  display: none;
+}
+
+.tg-input-search2 {
+  padding-right: 50px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid #d8dee9;
+  border-radius: 3px;
+  color: #4c566a;
+  margin-left: 5rem;
+  padding: 0.3rem 1rem 0.3rem 0.95rem;
+  width: 80%;
+  transition: 0.3s linear;
+  max-height: 12rem;
+  min-height: 15rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #4c566a;
+  font-size: 16px;
+  resize: none;
+}
+
+.tg-input-search2:focus {
+  border: 2px solid #008aa8;
+}
+
+.hidden-comments {
+  display: none;
+}
+
+.btn-success10 {
+  color: #2e3440;
+  transition: all .3s linear;
+  display: inline;
+  text-align: left;
+}
+
+.btn-success10 .btn-success10.active {
+  border-bottom: 3px solid #434456;
+  color: #434456;
+}
+
+.btn-success10:hover {
+  display: inline;
+}
+
+span3 {
+  font-family: Ubuntu-Medium,Arial,Helvetica,sans-serif;
+  transition: all .1s linear;
+  color: #434456;
+  display: inline-block;
+  font-family: Helvetica;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+span3:hover {
+  font-family: Ubuntu-Medium,Arial,Helvetica,sans-serif;
+  transition: all .1s linear;
+  color: #25a28c;
+  display: inline-block;
+  font-family: Helvetica;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+
