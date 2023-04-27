@@ -18,17 +18,37 @@
         <% end %>
     </p>
 </div>
-<p>
-    <% if @user == current_user %>
-    <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success-left" %>
-<% end %>
-</p>
+
 
 <p>
     <h2>Timeline</h2>
-</p>
+    <% if IssueVersion.where(user_full_name: @user.full_name).present? %>
+        <% IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version| %>
+          <div>
+            <% if version.attribute_name != "updated_at" %>
+                <p><b><%= @user.full_name %></b> has updated the attribute "<%= version.attribute_name %>" of the issue
+              <%= link_to "##{version.issue.id} #{version.issue.issue}", issue_path(version.issue), style:
+                "text-decoration: none;
+                font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                color: #008aa8;
+                font-size: 16px;
+                font-weight: normal;
+                margin-top: 1rem;
+                margin-bottom: 0.2rem;"
+                %>
+                at
+                <%= version.updated_at %>
+                </p>
 
-<p>
+            <% end %>
+          </div>
+        <% end %>
+    <% else %>
+        No timeline available.
+    <% end %>
+    </p>
+
+  <p>
     <h2>Watched</h2>
     <% if @user.watched_issues.present? %>
       <% @user.watched_issues.each do |issue| %>
@@ -50,7 +70,14 @@
       <p>No watched issues found.</p>
     <% end %>
 
+
+<p>
+    <% if @user == current_user %>
+    <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success-left" %>
+<% end %>
 </p>
+
 <% if @user == current_user %>
     <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success-left" %>
 <% end %>
+
