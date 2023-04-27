@@ -137,6 +137,29 @@ end
     end
   end
 
+  def add_watcher
+    @issue = Issue.find(params[:id])
+    @user = current_user
+    @issue.watchers << @user
+    redirect_to @issue
+  end
+
+  def add_watchers
+    @issue = Issue.find(params[:id])
+    if params[:user_ids].present?
+      @users = User.where(id: params[:user_ids])
+      @issue.watchers << @users
+    end
+    redirect_to @issue
+  end
+
+
+  def remove_watcher
+  @issue = Issue.find(params[:id])
+  @user = User.find(params[:user_id])
+  @issue.watchers.delete(@user)
+  redirect_to @issue
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -146,6 +169,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status, :description, attachments: [])
+      params.require(:issue).permit(:tipus, :severity, :priority, :issue, :status, :assign_to, :due_date, :reason_due_date, :reason_block, :block_status, :user_name, :description, attachments: [])
     end
 end

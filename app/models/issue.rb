@@ -5,7 +5,7 @@ class Issue < ApplicationRecord
   before_update :save_issue_version
   has_many :issue_versions
   # ...
-
+  has_and_belongs_to_many :watchers, class_name: 'User'
   private
 
   def save_issue_version
@@ -15,8 +15,10 @@ class Issue < ApplicationRecord
         attribute_name: attr,
         old_value: old_value,
         new_value: self.send(attr),
-        created_at_change: Time.current
+        created_at_change: Time.current,
+        user_full_name: self.user_name,
       ) if old_value != self.send(attr)
     end
   end
 end
+

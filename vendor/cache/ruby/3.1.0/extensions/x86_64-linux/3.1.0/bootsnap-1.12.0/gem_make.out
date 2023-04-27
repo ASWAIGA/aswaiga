@@ -1,0 +1,18 @@
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+/home/ubuntu/.rvm/rubies/ruby-3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-tgsykv sitelibdir\=./.gem.20230415-17818-tgsykv clean
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-tgsykv sitelibdir\=./.gem.20230415-17818-tgsykv
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-tgsykv sitelibdir\=./.gem.20230415-17818-tgsykv install
+/usr/bin/install -m 0755 bootsnap.so ./.gem.20230415-17818-tgsykv/bootsnap
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/bootsnap-1.12.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-tgsykv sitelibdir\=./.gem.20230415-17818-tgsykv clean

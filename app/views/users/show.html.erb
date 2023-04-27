@@ -29,9 +29,28 @@
 </p>
 
 <p>
-    <h2>Issues watched</h2>
-</p>
+    <h2>Watched</h2>
+    <% if @user.watched_issues.present? %>
+      <% @user.watched_issues.each do |issue| %>
+        <div>
+          <h3><%= "##{issue.id}" %>
+          <%= link_to issue.issue, issue_path(issue), style:
+            "text-decoration: none;
+            font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+            color: #008aa8;
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;"
+          %>
+        </div>
+        </h3>
+      <% end %>
+    <% else %>
+      <p>No watched issues found.</p>
+    <% end %>
 
+</p>
 <% if @user == current_user %>
     <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success-left" %>
 <% end %>
