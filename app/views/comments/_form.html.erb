@@ -1,12 +1,11 @@
 <% comments = @issue.comments.try(:build) || Comment.new %>
 <%= form_for([@issue, comments]) do |f| %>
 
-<% if current_user && current_user.respond_to?(:full_name) %>
-  <%= f.text_field :user_name, placeholder: 'User name', value: current_user.full_name, hidden: true %>
-  <% end %>
-
   <p>
     <text_area>
+      <% if current_user && current_user.respond_to?(:full_name) %>
+        <%= f.text_area :user_full_name, value: current_user.full_name, hidden: true %>
+      <% end %>
       <%= f.text_area :content, placeholder: "Type a new comment here" %>
       <%= f.submit "Publica", class:"btn btn-success4" %>
     </text_area>
