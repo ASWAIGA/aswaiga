@@ -36,7 +36,7 @@
   <% end %>
 
   <% IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version| %>
-    <% if version.attribute_name != "updated_at" %>
+    <% if version.attribute_name != "updated_at" && version.attribute_name != "user_name" %>
       <% collected_issues << {
         issue: version.issue,
         id: version.issue.id,
