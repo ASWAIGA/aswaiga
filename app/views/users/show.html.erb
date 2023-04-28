@@ -22,12 +22,38 @@
 
 <p>
     <h2>Timeline</h2>
-    <% if IssueVersion.where(user_full_name: @user.full_name).present? %>
-        <% IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version| %>
-          <div>
-            <% if version.attribute_name != "updated_at" %>
-                <p><b><%= @user.full_name %></b> has updated the attribute "<%= version.attribute_name %>" of the issue
-              <%= link_to "##{version.issue.id} #{version.issue.issue}", issue_path(version.issue), style:
+
+  <% collected_issues = [] %>
+  <% Issue.where(created_by: @user.full_name).map do |issue| %>
+    <% collected_issues << {
+      issue: issue,
+      id: issue.id,
+      title: issue.issue,
+      description: "create",
+      attribute: "null",
+      updated_at: issue.created_at
+    } %>
+  <% end %>
+
+  <% IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version| %>
+    <% if version.attribute_name != "updated_at" %>
+      <% collected_issues << {
+        issue: version.issue,
+        id: version.issue.id,
+        title: version.issue.issue,
+        description: "update",
+        attribute: version.attribute_name,
+        updated_at: version.updated_at
+      } %>
+    <% end %>
+  <% end %>
+
+
+ <% sorted_issues = collected_issues.sort_by {|issue| issue[:updated_at]}.reverse %>
+ <% sorted_issues.each do |issue| %>
+   <% if issue[:description] == "create" %>
+     <p><b><%= @user.full_name %></b> has created the issue
+              <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
                 "text-decoration: none;
                 font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
                 color: #008aa8;
@@ -37,16 +63,25 @@
                 margin-bottom: 0.2rem;"
                 %>
                 at
-                <%= version.updated_at %>
+                <%= issue[:updated_at] %>
                 </p>
-
-            <% end %>
-          </div>
-        <% end %>
-    <% else %>
-        No timeline available.
-    <% end %>
-    </p>
+   <% else %>
+     <p><b><%= @user.full_name %></b> has updated the attribute "<%= issue[:attribute] %>" of the issue
+              <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
+                "text-decoration: none;
+                font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                color: #008aa8;
+                font-size: 16px;
+                font-weight: normal;
+                margin-top: 1rem;
+                margin-bottom: 0.2rem;"
+                %>
+                at
+                <%= issue[:updated_at] %>
+                </p>
+   <% end %>
+  <% end %>
+</p>
 
   <p>
     <h2>Watched</h2>
@@ -70,7 +105,7 @@
       <p>No watched issues found.</p>
     <% end %>
 
-
+<br/>
 <p>
     <% if @user == current_user %>
     <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success-left" %>
