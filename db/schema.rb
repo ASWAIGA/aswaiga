@@ -81,9 +81,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_205328) do
     t.boolean "block_status"
     t.string "reason_block"
     t.string "description"
-    t.string "user_name"
     t.string "assignee"
     t.string "created_by"
+    t.string "user_name"
   end
 
   create_table "issues_users", id: false, force: :cascade do |t|

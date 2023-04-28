@@ -1,5 +1,10 @@
 class CreateIssues < ActiveRecord::Migration[7.0]
   def change
+     add_column :issues, :created_by, :string
+     add_column :issues, :assignee, :string
+  end
+
+  def change
     create_table :issues do |t|
       t.string :tipus
       t.string :severity
@@ -12,10 +17,6 @@ class CreateIssues < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-  end
-   def change
-     add_column :issues, :created_by, :string
-     add_column :issues, :assignee, :string
   end
 
 end
