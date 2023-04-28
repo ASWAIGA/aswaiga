@@ -50,36 +50,40 @@
 
 
  <% sorted_issues = collected_issues.sort_by {|issue| issue[:updated_at]}.reverse %>
- <% sorted_issues.each do |issue| %>
-   <% if issue[:description] == "create" %>
-     <p><b><%= @user.full_name %></b> has created the issue
-              <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
-                "text-decoration: none;
-                font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
-                color: #008aa8;
-                font-size: 16px;
-                font-weight: normal;
-                margin-top: 1rem;
-                margin-bottom: 0.2rem;"
-                %>
-                at
-                <%= issue[:updated_at] %>
-                </p>
-   <% else %>
-     <p><b><%= @user.full_name %></b> has updated the attribute "<%= issue[:attribute] %>" of the issue
-              <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
-                "text-decoration: none;
-                font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
-                color: #008aa8;
-                font-size: 16px;
-                font-weight: normal;
-                margin-top: 1rem;
-                margin-bottom: 0.2rem;"
-                %>
-                at
-                <%= issue[:updated_at] %>
-                </p>
-   <% end %>
+ <% if sorted_issues.size > 0 %>
+   <% sorted_issues.each do |issue| %>
+     <% if issue[:description] == "create" %>
+       <p><b><%= @user.full_name %></b> has created the issue
+                <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
+                  "text-decoration: none;
+                  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                  color: #008aa8;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin-top: 1rem;
+                  margin-bottom: 0.2rem;"
+                  %>
+                  at
+                  <%= issue[:updated_at] %>
+                  </p>
+     <% else %>
+       <p><b><%= @user.full_name %></b> has updated the attribute "<%= issue[:attribute] %>" of the issue
+                <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
+                  "text-decoration: none;
+                  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                  color: #008aa8;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin-top: 1rem;
+                  margin-bottom: 0.2rem;"
+                  %>
+                  at
+                  <%= issue[:updated_at] %>
+                  </p>
+     <% end %>
+    <% end %>
+  <% else %>
+    No timeline available.
   <% end %>
 </p>
 
