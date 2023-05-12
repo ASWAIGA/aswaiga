@@ -1,0 +1,15 @@
+<article>
+  <p>
+    <h3>
+      <% if comment.user_full_name %>
+        <%= comment.user_full_name %>
+      <% else %>
+        User not logged
+      <% end %>
+    </h3>
+    <small><%= comment.created_at.strftime("%d %b %Y %H:%M") %></small>
+    <br>
+    <%= comment.content %>
+  </p>
+</article>
+<hr>

@@ -1,0 +1,122 @@
+<p style="color: green"><%= notice %></p>
+
+<p><%= link_to "Home", issues_path, class:"btn btn-success-left" %></p>
+
+<div class="profile-info">
+    <p>
+        <% if @user.image.attached? %>
+            <%= image_tag @user.image, :style => "height: 200px; width: 200px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+        <% else %>
+            <img src="/assets/default-user.jpg" style="height: 200px; width: 200px; margin-left: auto; margin-right: auto; border-radius: 50%">
+        <%end%>
+        <h1><%= @user.full_name %></h1>
+        <h2><%= @user.email %></h2>
+        <% if @user.bio? %>
+            <%= @user.bio %>
+        <% else %>
+            User has no bio.
+        <% end %>
+    </p>
+</div>
+
+
+<p>
+    <h2>Timeline</h2>
+
+  <% collected_issues = [] %>
+  <% Issue.where(created_by: @user.full_name).map do |issue| %>
+    <% collected_issues << {
+      issue: issue,
+      id: issue.id,
+      title: issue.issue,
+      description: "create",
+      attribute: "null",
+      updated_at: issue.created_at
+    } %>
+  <% end %>
+
+  <% IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version| %>
+    <% if version.attribute_name != "updated_at" && version.attribute_name != "user_name" %>
+      <% collected_issues << {
+        issue: version.issue,
+        id: version.issue.id,
+        title: version.issue.issue,
+        description: "update",
+        attribute: version.attribute_name,
+        updated_at: version.updated_at
+      } %>
+    <% end %>
+  <% end %>
+
+
+ <% sorted_issues = collected_issues.sort_by {|issue| issue[:updated_at]}.reverse %>
+ <% if sorted_issues.size > 0 %>
+   <% sorted_issues.each do |issue| %>
+     <% if issue[:description] == "create" %>
+       <p><b><%= @user.full_name %></b> has created the issue
+                <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
+                  "text-decoration: none;
+                  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                  color: #008aa8;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin-top: 1rem;
+                  margin-bottom: 0.2rem;"
+                  %>
+                  at
+                  <%= issue[:updated_at] %>
+                  </p>
+     <% else %>
+       <p><b><%= @user.full_name %></b> has updated the attribute "<%= issue[:attribute] %>" of the issue
+                <%= link_to "##{issue[:id]} #{issue[:title]}", issue_path(issue[:issue]), style:
+                  "text-decoration: none;
+                  font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+                  color: #008aa8;
+                  font-size: 16px;
+                  font-weight: normal;
+                  margin-top: 1rem;
+                  margin-bottom: 0.2rem;"
+                  %>
+                  at
+                  <%= issue[:updated_at] %>
+                  </p>
+     <% end %>
+    <% end %>
+  <% else %>
+    No timeline available.
+  <% end %>
+</p>
+
+  <p>
+    <h2>Watched</h2>
+    <% if @user.watched_issues.present? %>
+      <% @user.watched_issues.each do |issue| %>
+        <div>
+          <h3><%= "##{issue.id}" %>
+          <%= link_to issue.issue, issue_path(issue), style:
+            "text-decoration: none;
+            font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+            color: #008aa8;
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;"
+          %>
+        </div>
+        </h3>
+      <% end %>
+    <% else %>
+      <p>No watched issues found.</p>
+    <% end %>
+
+<br/>
+<p>
+    <% if @user == current_user %>
+    <%= link_to "Edit", edit_user_registration_path, class:"btn btn-success-left" %>
+<% end %>
+</p>
+
+<% if @user == current_user %>
+    <%= button_to "Log out", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class:"btn btn-success-left" %>
+<% end %>
+

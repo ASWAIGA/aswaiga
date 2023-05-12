@@ -1,0 +1,19 @@
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+/home/ubuntu/.rvm/rubies/ruby-3.1.2/bin/ruby extconf.rb
+checking for onig_region_memsize() in ruby.h... yes
+creating Makefile
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-qmdf7q sitelibdir\=./.gem.20230415-17818-qmdf7q clean
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-qmdf7q sitelibdir\=./.gem.20230415-17818-qmdf7q
+compiling strscan.c
+linking shared-object strscan.so
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-qmdf7q sitelibdir\=./.gem.20230415-17818-qmdf7q install
+/usr/bin/install -m 0755 strscan.so ./.gem.20230415-17818-qmdf7q
+
+current directory: /home/ubuntu/environment/aswaiga/vendor/cache/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20230415-17818-qmdf7q sitelibdir\=./.gem.20230415-17818-qmdf7q clean

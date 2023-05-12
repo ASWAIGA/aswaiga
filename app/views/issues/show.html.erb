@@ -1,0 +1,122 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @issue %>
+<div>
+  <button id="btn" class="btn btn-success10" style="width: 160px; height: 40px;" type="button" onclick= comments()><span3><%= @issue.comments.count %> Comments</span3></button>
+</div>
+
+<div id = "comments" class="hidden-comments">
+  <%= render "comments/form" %>
+  <% if @issue.comments %>
+  <%= render @issue.comments.order(id: :desc) %>
+  <% end %>
+</div>
+
+<div>
+  <hr>
+  <h2>Watchers</h2>
+  <% @issue.watchers.each do |watcher| %>
+  <div class="watcher">
+    <h2>
+     <p>
+       <% if watcher.image.attached? %>
+           <%= image_tag watcher.image, :style => "height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+       <% else %>
+           <img src="/assets/default-user.jpg" style="height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%">
+       <%end%>
+      <%= link_to "#{watcher.full_name}", user_path(watcher.id), style:
+      "text-decoration: none;
+      font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+      color: #008aa8;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0.2rem;"
+      %>
+     </h2>
+  </div>
+  <% end %>
+
+  <% if current_user %>
+    <p>
+      <button type="button" class="btn btn-success4" data-bs-toggle="modal" data-bs-target="#addWatchersModal">
+      + Add watchers
+      </button>
+    </p>
+    <% if @issue.watchers.include?(current_user) %>
+      <%= form_tag remove_watcher_issue_path(@issue, current_user), method: :delete do %>
+        <%= submit_tag 'Unwatch', class:"btn btn-success4" %>
+      <% end %>
+    <% else %>
+      <%= button_to "Watch", add_watcher_issue_path(@issue), class:"btn btn-success4" %>
+    <% end %>
+    <hr>
+  </div>
+ <% end %>
+
+<br/>
+
+
+<div>
+  <%= link_to "Edit this issue", edit_issue_path(@issue), class:"btn btn-success4" %> |
+  <%= link_to "Back to issues", issues_path, class:"btn btn-success2" %>
+  <br>
+  <br>
+  <%= button_to "Destroy this issue", @issue, method: :delete,  class:"btn btn-success3" %>
+  <br>
+</div>
+
+  <script>
+    let message = false;
+    function comments() {
+      if (message === false) {
+        document.getElementById("comments").classList.remove("hidden-comments");
+        message = true;
+      }
+      else {
+        document.getElementById("comments").classList.add("hidden-comments");
+        message = false;
+      }
+    }
+
+  </script>
+
+
+<div class="modal fade" id="addWatchersModal" tabindex="-1" aria-labelledby="addWatchersModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <%= form_tag add_watchers_issue_path(@issue), method: :post do %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="addWatchersModalLabel">Add watchers</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <% User.where.not(id: @issue.watchers.pluck(:user_id)).each do |user| %>
+            <div class="form-check">
+              <%= check_box_tag 'user_ids[]', user.id %>
+              <% if user.image.attached? %>
+                 <%= image_tag user.image, :style => "height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%; object-fit: cover" %>
+             <% else %>
+                 <img src="/assets/default-user.jpg" style="height: 50px; width: 50px; margin-left: auto; margin-right: auto; border-radius: 50%">
+             <%end%>
+            <%= link_to "#{user.full_name}", user_path(user.id), style:
+            "text-decoration: none;
+            font-family: Ubuntu-Medium, Arial, Helvetica,sans-serif;
+            color: #008aa8;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;"
+            %>
+            </div>
+          <% end %>
+        </div>
+        <% if User.where.not(id: @issue.watchers.pluck(:user_id)).any? %>
+          <div class="modal-footer">
+            <%= submit_tag 'ADD', class:"btn btn-success4" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
