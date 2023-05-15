@@ -7,7 +7,7 @@ class Issue < ApplicationRecord
   has_many_attached :attachments
   validates :issue, presence: true
   before_update :save_issue_version
-  has_many :issue_versions
+  has_many :issue_versions, dependent: :destroy
   #belongs_to :user, foreign_key: "created_by", primary_key: "full_name"
   #delegate :full_name, to: :user, prefix: true, allow_nil: true
   # ...

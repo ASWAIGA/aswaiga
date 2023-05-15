@@ -150,6 +150,7 @@ end
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
+    @issue = Issue.find(params[:id])
     @issue.issue_versions.destroy_all
     @issue.destroy
 
