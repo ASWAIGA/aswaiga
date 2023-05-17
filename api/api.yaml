@@ -22,7 +22,7 @@ servers:
 tags:
   - name: comments
 paths:
-  /comments/{id}:
+  /issues/{id}/comments:
     get:
       tags:
         - comments
