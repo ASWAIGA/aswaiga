@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  post '/issues/:id/comment', to: 'comments#create'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
