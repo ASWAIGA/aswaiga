@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://3.238.244.247:8080
+  - url: http://3.219.218.49:8080
 tags:
   - name: issues
     description: Everything about your issues
@@ -35,6 +35,36 @@ paths:
         - name: search
           in: query
           description: Text to search for
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort order for results
+          schema:
+            type: string
+        - name: filter_assign_to
+          in: query
+          description: Filter by assignee
+          schema:
+            type: string
+        - name: filter_assignee
+          in: query
+          description: Filter by assignee
+          schema:
+            type: string
+        - name: filter_created_by
+          in: query
+          description: Filter by creator
+          schema:
+            type: string
+        - name: filter_status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+        - name: filter_priority
+          in: query
+          description: Filter by priority
           schema:
             type: string
       responses:
@@ -263,333 +293,6 @@ paths:
                   $ref: '#/components/examples/error409'
       security:
         - apiKey: []
-
-  /issues/priority:
-    get:
-      tags:
-        - issues
-      summary: Busca totes les Issues amb una prioritat concreta
-      description: Donat una prioritat busca les issues que tenen aquella prioritat
-      operationId: ShowIssuesByPriority
-      produces:
-        - '*/*'
-      parameters:
-        - name: filter_priority
-          in: query
-          description: Valor de la prioritat
-          required: true
-          type: string
-          allowEmptyValue: false
-          enum:
-            - Low
-            - Normal
-            - High
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-      deprecated: false
-
-  /issues/asignee:
-    get:
-      tags:
-        - issues
-      summary: Busca totes les Issues amb un assignee concret
-      description: Donat un assignee busca les issues que tenen aquell assignee
-      operationId: ShowIssuesByAssignee
-      produces:
-        - '*/*'
-      parameters:
-        - name: filter_assignee
-          in: query
-          description: Valor del assignee
-          required: true
-          type: string
-          allowEmptyValue: false
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-      deprecated: false
-
-  /issues/status:
-    get:
-      tags:
-        - issues
-      summary: Busca totes les Issues amb un status concret
-      description: Donat un status busca les issues que tenen aquell status
-      operationId: ShowIssuesByStatus
-      produces:
-        - '*/*'
-      parameters:
-        - name: filter_status
-          in: query
-          description: Valor del status
-          required: true
-          type: string
-          allowEmptyValue: false
-          enum:
-            - New
-            - In progress
-            - Ready for test
-            - Closed
-            - Needs info
-            - Rejected
-            - Postponed
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-      deprecated: false
-
-  /issues/created_by:
-    get:
-      tags:
-        - issues
-      summary: Busca totes les Issues amb una created_by concret
-      description: Donat un created_by busca les issues que tenen aquell created_by
-      operationId: ShowIssuesByCreatedBy
-      produces:
-        - '*/*'
-      parameters:
-        - name: filter_created_by
-          in: query
-          description: Valor del created_by
-          required: true
-          type: string
-          allowEmptyValue: false
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-      deprecated: false
-
-  /issues/assign_to:
-    get:
-      tags:
-        - issues
-      summary: Busca totes les Issues amb una assign_to concret
-      description: Donat un assign_to busca les issues que tenen aquell assigned_to
-      operationId: ShowIssuesByAssignTo
-      produces:
-        - '*/*'
-      parameters:
-        - name: filter_assign_to
-          in: query
-          description: Valor del assign_to
-          required: true
-          type: string
-          allowEmptyValue: false
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-      deprecated: false
 
 components:
   schemas:
