@@ -22,8 +22,6 @@ servers:
 tags:
   - name: issues
     description: Everything about your issues
-  - name: user
-    description: Everything about the users
 paths:
   /issues:
     get:
@@ -109,6 +107,89 @@ paths:
             required: true
             schema:
               type: integer
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '304':
+          description: 'Error: Not Modified'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error304'
+        '400':
+          description: 'Error: Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+    put:
+      tags:
+        - issues
+      summary: Update the issue associated to the id
+      description: Update the issue associated to the id
+      operationId: UpdateIssue
+      parameters:
+          - name: id
+            in: path
+            description: ID of the issue you want to update
+            required: true
+            schema:
+              type: integer
+      requestBody:
+        description: Issue identifier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdate'
       responses:
         '200':
           description: 'Successful operation'
@@ -285,6 +366,49 @@ components:
         created_at: "2023-05-12T10:17:36.259Z"
         updated_at: "2023-05-12T10:17:36.259Z"
         url: "http://IP:8080/issues/1.json"
+
+    IssueUpdate:
+      type: object
+      properties:
+        tipus:
+          type: string
+        severity:
+          type: string
+        priority:
+          type: string
+        issue:
+          type: string
+        status:
+          type: string
+        assign_to:
+          type: string
+        due_date:
+          type: string
+          format: date
+        reason_due_date:
+          type: string
+        block_status:
+          type: boolean
+        reason_block:
+          type: string
+        description:
+          type: string
+        assignee:
+          type: string
+      example:
+        "issue": {
+          "tipus": "Bug",
+          "severity": "Normal",
+          "priority": "Normal",
+          "issue": "New name",
+          "status": "In progress",
+          "assign_to": "",
+          "due_date": "",
+          "reason_due_date": "",
+          "block_status": true,
+          "reason_block": "Prueba",
+          "description": "Esto es una prueba",
+        }
     ErrorResult:
         type: object
         properties:
