@@ -108,7 +108,11 @@
     <% else %>
       <p>No watched issues found.</p>
     <% end %>
-
+  </p>
+<p>
+    <h2>API Key</h2>
+    <%= @user.api_key %>
+</p>
 <br/>
 <p>
     <% if @user == current_user %>

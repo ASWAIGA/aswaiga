@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[  edit update destroy ]
-  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  skip_before_action :verify_authenticity_token
+
 
   # GET /issues or /issues.json
   def index
@@ -83,11 +84,13 @@ class IssuesController < ApplicationController
   end
 
   def create_issues_bulk
-    issue_titles = params[:issue_titles]&.split("\n").map(&:strip)
-    issue_titles.each do |issue|
-      Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
-    end
+    issue_titles = Array(params[:issue_titles])&.map(&:strip)
 
+    if issue_titles.present?
+      issue_titles.each do |issue|
+        Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
+      end
+    end
     redirect_to issues_path
   end
 
@@ -120,37 +123,59 @@ class IssuesController < ApplicationController
 
   # PATCH/PUT /issues/1 or /issues/1.json
   def update
-  respond_to do |format|
-    if params[:unblock_clicked] == 'true'
-      if @issue.update(reason_block: nil, block_status: false)
-        format.html { redirect_to issue_url(@issue), notice: "Issue unblocked." }
-        format.json { render :show, status: :ok, location: @issue }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
-      end
-    elsif params[:block_clicked] == 'true'
-      if @issue.update(block_status: true, reason_block: params[:issue][:reason_block])
-        format.html { redirect_to issue_url(@issue), notice: "Issue blocked." }
-        format.json { render :show, status: :ok, location: @issue }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
-      end
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
-      if @issue.update(issue_params)
-        format.html { redirect_to issue_url(@issue), notice: "Issue was successfully updated." }
-        format.json { render :show, status: :ok, location: @issue }
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
+        @user = @APIuser
+      end
+    end
+    respond_to do |format|
+      if params[:unblock_clicked] == 'true'
+        if @issue.update(reason_block: nil, block_status: false)
+          format.html { redirect_to issue_url(@issue), notice: "Issue unblocked." }
+          format.json { render :show, status: :ok, location: @issue }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @issue.errors, status: :unprocessable_entity }
+        end
+      elsif params[:block_clicked] == 'true'
+        if @issue.update(block_status: true, reason_block: params[:issue][:reason_block])
+          format.html { redirect_to issue_url(@issue), notice: "Issue blocked." }
+          format.json { render :show, status: :ok, location: @issue }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @issue.errors, status: :unprocessable_entity }
+        end
+      else
+        if @issue.update(issue_params)
+          format.html { redirect_to issue_url(@issue), notice: "Issue was successfully updated." }
+          format.json { render :show, status: :ok, location: @issue }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @issue.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
-end
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      else
+        @user = @APIuser
+      end
+    end
     @issue = Issue.find(params[:id])
     @issue.issue_versions.destroy_all
     @issue.destroy
@@ -166,6 +191,11 @@ end
     @user = current_user
     @issue.watchers << @user
     redirect_to @issue
+  end
+
+  def get_watchers
+    @issue = Issue.find(params[:id])
+    render json: @issue.watchers
   end
 
   def add_watchers
