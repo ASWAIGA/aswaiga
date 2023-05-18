@@ -8,10 +8,7 @@ info:
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
   - url: http://3.239.193.254:8080
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/feature98-get_watchers_issue
 tags:
   - name: issues
 paths:
@@ -319,7 +316,6 @@ paths:
                 errorExample:
                   $ref: '#/components/examples/error409'
 
-<<<<<<< HEAD
   /issues/bulk_insert:
     post:
       tags:
@@ -334,7 +330,70 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/BulkInsert'
-=======
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '304':
+          description: 'Error: Not Modified'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error304'
+        '400':
+          description: 'Error: Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
   /issues/{id}/watchers:
     get:
       tags:
@@ -349,18 +408,13 @@ paths:
             required: true
             schema:
               type: integer
->>>>>>> origin/feature98-get_watchers_issue
       responses:
         '200':
           description: 'Successful operation'
           content:
             application/json:
               schema:
-<<<<<<< HEAD
-                $ref: '#/components/schemas/ShowIssue'
-=======
                 $ref: '#/components/schemas/ShowUser'
->>>>>>> origin/feature98-get_watchers_issue
         '304':
           description: 'Error: Not Modified'
           content:
