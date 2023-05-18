@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show ]
-  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
-
+  before_action :set_user, only: %i[ show update destroy ]
+  skip_before_action :verify_authenticity_token
   def index
     @users = User.all
     respond_to do |format|
@@ -19,7 +18,18 @@ class UsersController < ApplicationController
   end
 
   def update
-  @user = User.find(params[:id])
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      elsif @APIuser.id != @user.id
+        render :json => { "status" => "401", "error" => "Only the user can edit himself." }, status: :unauthorized and return
+      end
+    end
+    @user = User.find(params[:id])
     respond_to do |format|
       if @user.update(usuario_params)
         format.html { redirect_to @user }
@@ -40,5 +50,9 @@ class UsersController < ApplicationController
 
     def usuario_params
     params.require(:user).permit(:full_name, :image, :bio)
+    end
+
+    def has_valid_api_key?
+      request.headers['X-API-KEY'] == 'hola'
     end
 end
