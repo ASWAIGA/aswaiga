@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://3.219.218.49:8080
+  - url: http://3.230.142.145:8080
 tags:
   - name: issues
     description: Everything about your issues
