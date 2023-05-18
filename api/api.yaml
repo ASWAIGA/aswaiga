@@ -1,22 +1,11 @@
 openapi: 3.0.3
 info:
+  version: 1.0.0
   title: ASWAIGA
   description: |-
-    Aqui va la descripcion
+    This is the Open API documentation for the REST API of our beloved application **ASWAIGA**
 
-    Some useful links:
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
-    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
-  termsOfService: http://swagger.io/terms/
-  contact:
-    email: apiteam@swagger.io
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.11
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
 servers:
   - url: http://3.238.98.186:8080
 tags:
@@ -473,6 +462,89 @@ paths:
                   $ref: '#/components/examples/error409'
       security:
         - apiKey: []
+    put:
+      tags:
+        - user
+      summary: Update the user associated to the id
+      description: Update the user associated to the id
+      operationId: UpdateUser
+      parameters:
+          - name: id
+            in: path
+            description: ID of the user you want to update
+            required: true
+            schema:
+              type: integer
+      requestBody:
+        description: User identifier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowUser'
+        '304':
+          description: 'Error: Not Modified'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error304'
+        '400':
+          description: 'Error: Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
 components:
   schemas:
     ShowIssue:
@@ -589,6 +661,19 @@ components:
           "block_status": true,
           "reason_block": "Prueba",
           "description": "Esto es una prueba",
+        }
+    UserUpdate:
+      type: object
+      properties:
+        full_name:
+          type: string
+        bio:
+          type: string
+          nullable: true
+      example:
+        "user": {
+          "full_name": "Example NewSurname",
+          "bio": "This is another bio."
         }
     ErrorResult:
         type: object
