@@ -8,7 +8,10 @@ info:
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
   - url: http://3.239.193.254:8080
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/feature98-get_watchers_issue
 tags:
   - name: issues
 paths:
@@ -316,6 +319,7 @@ paths:
                 errorExample:
                   $ref: '#/components/examples/error409'
 
+<<<<<<< HEAD
   /issues/bulk_insert:
     post:
       tags:
@@ -330,13 +334,33 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/BulkInsert'
+=======
+  /issues/{id}/watchers:
+    get:
+      tags:
+        - issues
+      summary: Show the watchers of the issue associated to the id
+      description: Show the watchers of the issue associated to the id
+      operationId: ShowWacthers
+      parameters:
+          - name: id
+            in: path
+            description: ID of the issue you want to show the watchers from
+            required: true
+            schema:
+              type: integer
+>>>>>>> origin/feature98-get_watchers_issue
       responses:
         '200':
           description: 'Successful operation'
           content:
             application/json:
               schema:
+<<<<<<< HEAD
                 $ref: '#/components/schemas/ShowIssue'
+=======
+                $ref: '#/components/schemas/ShowUser'
+>>>>>>> origin/feature98-get_watchers_issue
         '304':
           description: 'Error: Not Modified'
           content:
