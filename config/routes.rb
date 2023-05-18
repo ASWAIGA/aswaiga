@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get '/issues/:id/comments', to: 'comments#index'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

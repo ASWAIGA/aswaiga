@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.all
+    @comments = Comment.where(issue_id: params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @comments }
@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @issue = Issue.find(params[:issue_id])
     @comment = @issue.comments.find(params[:id])
     respond_to do |format|
       format.html
