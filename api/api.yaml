@@ -315,6 +315,85 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error409'
+
+  /issues/bulk_insert:
+    post:
+      tags:
+        - issues
+      summary: Bulk insert of issues
+      description: Bulk insert of issues
+      operationId: BulkInsert
+      requestBody:
+        description: Bulk identifier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkInsert'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '304':
+          description: 'Error: Not Modified'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error304'
+        '400':
+          description: 'Error: Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error400'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
   /users:
     get:
       tags:
@@ -613,6 +692,7 @@ components:
         created_at: "2023-05-12T10:17:36.259Z"
         updated_at: "2023-05-12T10:17:36.259Z"
         url: "http://IP:8080/issues/1.json"
+
     ShowUser:
         type: object
         properties:
@@ -645,6 +725,7 @@ components:
           created_at: "2023-05-12T10:17:36.259Z"
           updated_at: "2023-05-12T10:17:36.259Z"
           url: "http://IP:8080/users/1.json"
+
     IssueUpdate:
       type: object
       properties:
@@ -722,6 +803,13 @@ components:
           "user_full_name": "Joel",
           "text": "Intentaré arreglarlo",
         }
+    BulkInsert:
+      type: object
+      properties:
+        issue_titles:
+          type: array
+          items:
+            type: string
 
     ErrorResult:
         type: object

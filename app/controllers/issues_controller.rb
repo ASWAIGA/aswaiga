@@ -84,11 +84,13 @@ class IssuesController < ApplicationController
   end
 
   def create_issues_bulk
-    issue_titles = params[:issue_titles]&.split("\n").map(&:strip)
-    issue_titles.each do |issue|
-      Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
-    end
+    issue_titles = Array(params[:issue_titles])&.map(&:strip)
 
+    if issue_titles.present?
+      issue_titles.each do |issue|
+        Issue.find_or_create_by(issue: issue, tipus: "Bug", severity: "Normal", priority: "Normal", status: "New", assign_to: "Not Assigned")
+      end
+    end
     redirect_to issues_path
   end
 
