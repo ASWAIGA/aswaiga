@@ -7,7 +7,7 @@ info:
 
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
-  - url: http://3.239.193.254:8080
+  - url: http://3.227.17.240:8080
 
 tags:
   - name: issues
