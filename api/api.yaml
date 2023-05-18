@@ -330,7 +330,7 @@ paths:
     post:
       tags:
         - issues
-      summary: Add a comment to the issue associated to the id
+      summary: Add a comment to the issue associated to the id [NOT WORKING]
       description: Add a comment to the issue associated to the id
       operationId: AddComment
       parameters:
@@ -684,11 +684,14 @@ components:
           type: integer
         content:
           type: string
+        user_full_name:
+          type: string
 
       example:
         "comment": {
-          "content": "Intentaré arreglarlo",
-          "user_full_name": "Joel"
+          "content": "Este es mi comentario",
+          "issue_id": 1,
+          "user_full_name": "Juan Perez"
         }
 
     ErrorResult:
