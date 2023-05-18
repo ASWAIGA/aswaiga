@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get '/issues/:id/watchers', to: 'issues#get_watchers'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

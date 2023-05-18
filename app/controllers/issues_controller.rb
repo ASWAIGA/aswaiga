@@ -169,6 +169,11 @@ end
     redirect_to @issue
   end
 
+  def get_watchers
+    @issue = Issue.find(params[:id])
+    render json: @issue.watchers
+  end
+
   def add_watchers
     @issue = Issue.find(params[:id])
     if params[:user_ids].present?
