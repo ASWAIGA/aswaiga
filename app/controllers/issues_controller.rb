@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[  edit update destroy ]
-  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
+  skip_before_action :verify_authenticity_token
+
 
   # GET /issues or /issues.json
   def index
