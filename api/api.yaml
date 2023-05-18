@@ -39,7 +39,7 @@ paths:
             type: string
         - name: sort
           in: query
-          description: Sort order for results
+          description: Sort by providing status_asc or priority_asc or assign_to_asc or assignee_asc or created_by_asc
           schema:
             type: string
         - name: filter_assign_to
