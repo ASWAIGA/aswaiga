@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://3.219.218.49:8080
+  - url: http://18.215.15.114:8080
 tags:
   - name: issues
     description: Everything about your issues
@@ -330,8 +330,8 @@ paths:
     post:
       tags:
         - issues
-      summary: Bulk insert d'issues
-      description: Bulk insert d'issues
+      summary: Bulk insert of issues
+      description: Bulk insert of issues
       operationId: BulkInsert
       requestBody:
         description: Bulk identifier
@@ -595,6 +595,7 @@ components:
         created_at: "2023-05-12T10:17:36.259Z"
         updated_at: "2023-05-12T10:17:36.259Z"
         url: "http://IP:8080/issues/1.json"
+
     ShowUser:
         type: object
         properties:
@@ -627,6 +628,7 @@ components:
           created_at: "2023-05-12T10:17:36.259Z"
           updated_at: "2023-05-12T10:17:36.259Z"
           url: "http://IP:8080/users/1.json"
+
     IssueUpdate:
       type: object
       properties:
@@ -671,12 +673,12 @@ components:
         }
     BulkInsert:
       type: object
-      additionalProperties:
-        type: string
-      example:
-        "issue": {
-          "issue": "New name"
-        }
+      properties:
+        issue_titles:
+          type: array
+          items:
+            type: string
+
     ErrorResult:
         type: object
         properties:
