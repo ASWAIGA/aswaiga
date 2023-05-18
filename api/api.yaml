@@ -113,6 +113,85 @@ paths:
       security:
         - apiKey: []
 
+    post:
+      tags:
+        - issues
+      summary: Crea una issue
+      description: Es crea una issue amb la informacio enviada pel body i parametres
+      operationId: addIssue
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          type: object
+          properties:
+            assignee:
+              type: string
+            description:
+              type: string
+            subject:
+              type: string
+            assign_to:
+              type: string
+          required: true
+          schema:
+            $ref: '#/definitions/IssueDTO'
+        - name: status
+          in: query
+          description: Status que es vol assignar a la issue
+          required: false
+          type: string
+          default: New
+          allowEmptyValue: false
+          enum:
+            - New
+            - In Progress
+            - Ready for test
+            - Closed
+            - Needs info
+            - Rejected
+            - Postponed
+            -
+        - name: tipus
+          in: query
+          description: Tipus que es vol assignar a la issue
+          required: false
+          type: string
+          default: Bug
+          allowEmptyValue: false
+          enum:
+            - Bug
+            - Question
+            - Enhancement
+
+        - name: Severity
+          in: query
+          description: Severity que es vol assignar a la issue
+          required: false
+          type: string
+          default: Wishlist
+          allowEmptyValue: false
+          enum:
+            - Wishlist
+            - Minor
+            - Normal
+            - Important
+            - Critical
+
+        - name: Priority
+          in: query
+          description: Priority que es vol assignar a la issue
+          required: false
+          type: string
+          default: Low
+          allowEmptyValue: false
+          enum:
+            - Low
+            - Normal
+            - High
+
   /issues/{id}:
     get:
       tags:
