@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://44.197.133.25:8080
+  - url: http://3.219.218.49:8080
 tags:
   - name: comments
 paths:
@@ -80,6 +80,7 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error409'
+
 components:
   schemas:
     ErrorResult:
