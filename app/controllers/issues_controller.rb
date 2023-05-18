@@ -165,17 +165,6 @@ class IssuesController < ApplicationController
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
-    api_key = request.headers[:HTTP_X_API_KEY]
-    if api_key.nil?
-      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
-    else
-      @APIuser = User.find_by_api_key(api_key)
-      if @APIuser.nil?
-        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
-      else
-        @user = @APIuser
-      end
-    end
     @issue = Issue.find(params[:id])
     @issue.issue_versions.destroy_all
     @issue.destroy

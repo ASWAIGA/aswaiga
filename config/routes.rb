@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get '/issues/:id/comments', to: 'comments#index'
   get '/issues/:id/watchers', to: 'issues#get_watchers'
+  delete '/issues/:id/delete_watcher/:user_id', to: 'issues#remove_watcher'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
