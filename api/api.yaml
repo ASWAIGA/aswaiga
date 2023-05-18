@@ -7,10 +7,10 @@ info:
 
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
-  - url: http://3.219.218.49:8080
+  - url: http://3.239.193.254:8080
 
 tags:
-  - name: comments
+  - name: issues
 paths:
 
   /issues:
@@ -512,7 +512,7 @@ paths:
   /issues/{id}/comments:
     get:
       tags:
-        - comments
+        - issues
       summary: Comments of an issue
       description: Show the comments of an issue
       operationId: showComments
@@ -700,17 +700,6 @@ components:
           "full_name": "Example NewSurname",
           "bio": "This is another bio."
         }
-    ErrorResult:
-        type: object
-        properties:
-          status:
-            type: integer
-            enum: [304, 400, 401, 403, 404, 409]
-          error:
-            type: string
-            enum: ["Not Modified", "Bad Request", "Unauthorized", "Forbidden", "Not Found", "Conflict"]
-          message:
-            type: string
 
     showComments:
       type: object
@@ -733,6 +722,18 @@ components:
           "user_full_name": "Joel",
           "text": "Intentaré arreglarlo",
         }
+
+    ErrorResult:
+        type: object
+        properties:
+          status:
+            type: integer
+            enum: [304, 400, 401, 403, 404, 409]
+          error:
+            type: string
+            enum: ["Not Modified", "Bad Request", "Unauthorized", "Forbidden", "Not Found", "Conflict"]
+          message:
+            type: string
 
   examples:
     error304:
