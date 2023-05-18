@@ -7,13 +7,12 @@ info:
 
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
-  - url: http://3.238.98.186:8080
+  - url: http://3.219.218.49:8080
+
 tags:
-  - name: issues
-    description: Everything about your issues
-  - name: user
-    description: Everything about the users
+  - name: comments
 paths:
+
   /issues:
     get:
       tags:
@@ -84,6 +83,7 @@ paths:
                   $ref: '#/components/examples/error409'
       security:
         - apiKey: []
+
   /issues/{id}:
     get:
       tags:
@@ -161,6 +161,7 @@ paths:
                   $ref: '#/components/examples/error409'
       security:
         - apiKey: []
+
     put:
       tags:
         - issues
@@ -507,6 +508,30 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error400'
+
+  /issues/{id}/comments:
+    get:
+      tags:
+        - comments
+      summary: Comments of an issue
+      description: Show the comments of an issue
+      operationId: showComments
+      parameters:
+        - name: id
+          in: path
+          description: ID of the issue you want to see the comments from
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: 'Successful Operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/showComments'
+
         '401':
           description: 'Error: Unauthorized'
           content:
@@ -686,6 +711,29 @@ components:
             enum: ["Not Modified", "Bad Request", "Unauthorized", "Forbidden", "Not Found", "Conflict"]
           message:
             type: string
+
+    showComments:
+      type: object
+      properties:
+        issue_id:
+          type: integer
+        user_name:
+          type: string
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      example:
+        "comment": {
+          "issue_id": 1,
+          "user_full_name": "Joel",
+          "text": "Intentaré arreglarlo",
+        }
+
   examples:
     error304:
       value:
@@ -717,6 +765,7 @@ components:
         status: 409
         error: "Conflict"
         message: "Conflict with the operation"
+
   securitySchemes:
     apiKey:
       type: apiKey
