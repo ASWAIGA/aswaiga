@@ -118,7 +118,7 @@ class IssuesController < ApplicationController
       end
     end
     @issue = Issue.new(issue_params)
-    @issue.created_by = @user.full_name
+    @issue.created_by = @user.id
     respond_to do |format|
       if params[:block_clicked] == 'true'
         if @issue.update(block_status: true)
