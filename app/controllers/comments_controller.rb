@@ -1,5 +1,18 @@
 class CommentsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def create
+    @user = current_user
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      else
+        @user = @APIuser
+      end
+    end
     @issue = Issue.find(params[:issue_id])
     @comment = @issue.comments.create(comment_params)
     redirect_to @issue
