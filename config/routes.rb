@@ -24,6 +24,13 @@ Rails.application.routes.draw do
 
   post 'issues/', to: 'issues#create'
 
+  resources :users do
+    member do
+      get 'timeline'
+      get 'watched', to: 'users#watched'
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'issues#index'
