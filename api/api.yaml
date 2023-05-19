@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://3.230.142.145:8080
+  - url: http://3.239.83.88:8080
 tags:
   - name: issues
     description: Everything about your issues
@@ -116,14 +116,14 @@ paths:
     post:
       tags:
         - issues
-      summary: Crea una issue
-      description: Es crea una issue amb la informacio enviada pel body i parametres
+      summary: Creates a new issue with its parametres
+      description: Creates a new issue with its parametres
       operationId: addIssue
       requestBody:
         content:
           application/json:
             schema:
-               $ref: '#/components/schemas/IssueUpdate'
+               $ref: '#/components/schemas/IssueCreate'
 
       responses:
         '200':
@@ -438,7 +438,22 @@ components:
         assignee:
           type: string
 
-    CreateIssue:
+      example:
+        "issue": {
+          "tipus": "Bug",
+          "severity": "Normal",
+          "priority": "Normal",
+          "issue": "New name",
+          "status": "In progress",
+          "assign_to": "",
+          "due_date": "",
+          "reason_due_date": "",
+          "block_status": true,
+          "reason_block": "Prueba",
+          "description": "Esto es una prueba",
+        }
+
+    IssueCreate:
       type: object
       properties:
         tipus:
@@ -467,20 +482,6 @@ components:
         assignee:
           type: string
 
-      example:
-        "issue": {
-          "tipus": "Bug",
-          "severity": "Normal",
-          "priority": "Normal",
-          "issue": "New name",
-          "status": "In progress",
-          "assign_to": "",
-          "due_date": "",
-          "reason_due_date": "",
-          "block_status": true,
-          "reason_block": "Prueba",
-          "description": "Esto es una prueba",
-        }
 
   examples:
     error304:
