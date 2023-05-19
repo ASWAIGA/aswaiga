@@ -6,7 +6,7 @@ Students:
 
 * Rivera, Joel
 
-* Sever, Alba Maria
+* Server, Alba Maria
 
 * Turu, Marc
 
