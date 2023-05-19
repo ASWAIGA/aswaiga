@@ -206,8 +206,17 @@ class IssuesController < ApplicationController
   end
 
   def add_watcher
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      end
+    end
     @issue = Issue.find(params[:id])
-    @user = current_user
+    @user = @APIuser
     @issue.watchers << @user
     redirect_to @issue
   end
@@ -237,10 +246,18 @@ class IssuesController < ApplicationController
 
 
   def remove_watcher
+  api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      end
+    end
   @issue = Issue.find(params[:id])
   @user = User.find(params[:user_id])
   @issue.watchers.delete(@user)
-  redirect_to @issue
   end
 
   private
