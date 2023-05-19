@@ -84,6 +84,15 @@ class IssuesController < ApplicationController
   end
 
   def create_issues_bulk
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      end
+    end
     issue_titles = Array(params[:issue_titles])&.map(&:strip)
 
     if issue_titles.present?
@@ -96,10 +105,20 @@ class IssuesController < ApplicationController
 
   # POST /issues or /issues.json
   def create
-    @issue = Issue.new(issue_params)
-    if current_user
-      @issue.created_by = current_user.full_name
+    @user = current_user
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      else
+        @user = @APIuser
+      end
     end
+    @issue = Issue.new(issue_params)
+    @issue.created_by = @user.full_name
     respond_to do |format|
       if params[:block_clicked] == 'true'
         if @issue.update(block_status: true)
@@ -199,6 +218,15 @@ class IssuesController < ApplicationController
   end
 
   def add_watchers
+    api_key = request.headers[:HTTP_X_API_KEY]
+    if api_key.nil?
+      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
+    else
+      @APIuser = User.find_by_api_key(api_key)
+      if @APIuser.nil?
+        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
+      end
+    end
     @issue = Issue.find(params[:id])
     if params[:user_ids].present?
       @users = User.where(id: params[:user_ids])

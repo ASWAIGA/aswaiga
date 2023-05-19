@@ -7,12 +7,69 @@ info:
 
     - [The ASWAIGA repository](https://github.com/ASWAIGA/aswaiga)
 servers:
-  - url: http://3.239.83.88:8080
+  - url: http://3.235.198.184:8080
 tags:
   - name: issues
 paths:
 
   /issues:
+    post:
+      tags:
+        - issues
+      summary: Creates a new issue with its parametres
+      description: Creates a new issue with its parametres
+      operationId: addIssue
+      requestBody:
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/IssueCreate'
+
+      responses:
+        '201':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
     get:
       tags:
         - issues
@@ -107,64 +164,6 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error404'
-        '409':
-          description: 'Conflict with the operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error409'
-      security:
-        - apiKey: []
-
-    post:
-      tags:
-        - issues
-      summary: Creates a new issue with its parametres
-      description: Creates a new issue with its parametres
-      operationId: addIssue
-      requestBody:
-        content:
-          application/json:
-            schema:
-               $ref: '#/components/schemas/IssueCreate'
-
-      responses:
-        '200':
-          description: 'Successful operation'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShowIssue'
-        '404':
-          description: 'Error: Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error404'
-        '401':
-          description: 'Error: Unauthorized'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error401'
-        '403':
-          description: 'Error: Forbidden'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResult'
-              examples:
-                errorExample:
-                  $ref: '#/components/examples/error403'
         '409':
           description: 'Conflict with the operation'
           content:
@@ -408,6 +407,8 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
 
   /issues/bulk_insert:
     post:
@@ -843,7 +844,8 @@ paths:
               examples:
                 errorExample:
                   $ref: '#/components/examples/error400'
-
+      security:
+        - apiKey: []
   /issues/{id}/comments:
     get:
       tags:
@@ -980,7 +982,6 @@ components:
           bio: This is a bio.
           created_at: "2023-05-12T10:17:36.259Z"
           updated_at: "2023-05-12T10:17:36.259Z"
-          url: "http://IP:8080/users/1.json"
 
     IssueUpdate:
       type: object
@@ -1066,6 +1067,12 @@ components:
           type: array
           items:
             type: string
+      example:
+        {
+          "issue_titles": [
+            "bulk1", "bulk2", "bulk3"
+          ]
+        }
 
     AddWatcher:
       type: object
@@ -1074,6 +1081,12 @@ components:
           type: array
           items:
             type: integer
+      example:
+        {
+          "user_ids": [
+            1, 2
+          ]
+        }
 
     ErrorResult:
         type: object
@@ -1115,7 +1128,20 @@ components:
           type: string
         assignee:
           type: string
-
+      example:
+        "issue": {
+          "tipus": "Question",
+          "severity": "Minor",
+          "priority": "High",
+          "issue": "One issue",
+          "status": "Needs info",
+          "assign_to": "",
+          "due_date": "",
+          "reason_due_date": "",
+          "block_status": false,
+          "reason_block": "",
+          "description": "Esto es una issue nueva",
+        }
 
   examples:
     error304:
