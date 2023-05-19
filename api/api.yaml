@@ -18,11 +18,683 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://18.204.48.244:8080
+  - url: http://44.211.169.125:8080
 tags:
   - name: issues
     description: Everything about your issues
   - name: user
     description: Everything about the users
 paths:
+  /issues:
+    get:
+      tags:
+        - issues
+      summary: Show all the issues
+      description: Show all the issues
+      operationId: showAllIssues
+      parameters:
+        - name: search
+          in: query
+          description: Text to search for
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort order for results
+          schema:
+            type: string
+        - name: filter_assign_to
+          in: query
+          description: Filter by assigned
+          schema:
+            type: string
+        - name: filter_assignee
+          in: query
+          description: Filter by assignee
+          schema:
+            type: string
+        - name: filter_created_by
+          in: query
+          description: Filter by creator
+          schema:
+            type: string
+        - name: filter_status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+        - name: filter_priority
+          in: query
+          description: Filter by priority
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+  /issues/{id}:
+    get:
+      tags:
+        - issues
+      summary: Show the issue associated to the id
+      description: Show the issue associated to the id
+      operationId: ShowIssue
+      parameters:
+          - name: id
+            in: path
+            description: ID of the issue you want to show
+            required: true
+            schema:
+              type: integer
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
+    put:
+      tags:
+        - issues
+      summary: Update the issue associated to the id
+      description: Update the issue associated to the id
+      operationId: UpdateIssue
+      parameters:
+          - name: id
+            in: path
+            description: ID of the issue you want to update
+            required: true
+            schema:
+              type: integer
+      requestBody:
+        description: Issue identifier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueUpdate'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
+    delete:
+      tags:
+        - issues
+      summary: Delete the issue associated with the id
+      description: Delete the issue associated with the id
+      operationId: DeleteIssue
+      parameters:
+        - name: id
+          in: path
+          description: ID of the issue you want to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 'Issue deleted'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
+  /users:
+    get:
+      tags:
+        - user
+      summary: Show all the users
+      description: Show the user associated to the id
+      operationId: ShowAllUsers
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowUser'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
+  /users/{id}:
+    get:
+      tags:
+        - user
+      summary: Show the user associated to the id
+      description: Show the user associated to the id
+      operationId: ShowUser
+      parameters:
+          - name: id
+            in: path
+            description: ID of the user you want to show
+            required: true
+            schema:
+              type: integer
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowUser'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+    put:
+      tags:
+        - user
+      summary: Update the user associated to the id
+      description: Update the user associated to the id
+      operationId: UpdateUser
+      parameters:
+          - name: id
+            in: path
+            description: ID of the issue you want to update
+            required: true
+            schema:
+              type: integer
+      requestBody:
+        description: User identifier
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowIssue'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+      security:
+        - apiKey: []
+
+  /users/{id}/timeline:
+    get:
+      summary: Obtain the user associated to the id's timeline
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: timeline obtained correctly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimelineResponse'
+
 components:
+  schemas:
+    ShowIssue:
+      type: object
+      properties:
+        id:
+          type: integer
+        tipus:
+          type: string
+        severity:
+          type: string
+        priority:
+          type: string
+        issue:
+          type: string
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+        assign_to:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+      example:
+        id: 1
+        tipus: Bug
+        severity: Normal
+        priority: Normal
+        issue: Hola que tal
+        description: Esto es una issue
+        status: New
+        assign_to: Not Assigned
+        created_at: "2023-05-12T10:17:36.259Z"
+        updated_at: "2023-05-12T10:17:36.259Z"
+        url: "http://IP:8080/issues/1.json"
+
+    ShowUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        full_name:
+          type: string
+        uid:
+          type: string
+        bio:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+      example:
+        id: 1
+        email: example@gmail.com
+        full_name: Example Surexample
+        uid: 81723871837
+        bio: This is a bio.
+        created_at: "2023-05-12T10:17:36.259Z"
+        updated_at: "2023-05-12T10:17:36.259Z"
+        url: "http://IP:8080/users/1.json"
+
+    ErrorResult:
+        type: object
+        properties:
+          status:
+            type: integer
+            enum: [304, 400, 401, 403, 404, 409]
+          error:
+            type: string
+            enum: ["Not Modified", "Bad Request", "Unauthorized", "Forbidden", "Not Found", "Conflict"]
+          message:
+            type: string
+
+    IssueUpdate:
+      type: object
+      properties:
+        tipus:
+          type: string
+        severity:
+          type: string
+        priority:
+          type: string
+        issue:
+          type: string
+        status:
+          type: string
+        assign_to:
+          type: string
+        due_date:
+          type: string
+          format: date
+        reason_due_date:
+          type: string
+        block_status:
+          type: boolean
+        reason_block:
+          type: string
+        description:
+          type: string
+        assignee:
+          type: string
+
+      example:
+        "issue": {
+          "tipus": "Bug",
+          "severity": "Normal",
+          "priority": "Normal",
+          "issue": "New name",
+          "status": "In progress",
+          "assign_to": "",
+          "due_date": "",
+          "reason_due_date": "",
+          "block_status": true,
+          "reason_block": "Prueba",
+          "description": "Esto es una prueba",
+        }
+
+    IssueEvent:
+      type: object
+      properties:
+        user_full_name:
+          type: string
+        description:
+          type: string
+        issue_id:
+          type: integer
+        issue_title:
+          type: string
+        issue_attribute:
+          type: string
+        at:
+          type: string
+          format: date-time
+
+    TimelineResponse:
+      type: object
+      properties:
+        timeline:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueEvent'
+
+    UserUpdate:
+      type: object
+      properties:
+        full_name:
+          type: string
+        bio:
+          type: string
+          nullable: true
+      example:
+        "user": {
+          "full_name": "Example NewSurname",
+          "bio": "This is another bio."
+        }
+
+  examples:
+    error304:
+      value:
+        status: 304
+        error: "Not Modified"
+        message: "You have already made this action. You can not do it twice."
+    error400:
+      value:
+        status: 400
+        error: "Bad Request"
+        message: "Bad Request"
+    error401:
+      value:
+        status: 401
+        error: "Unauthorized"
+        message: "No Api Key provided"
+    error403:
+      value:
+        status: 403
+        error: "Forbidden"
+        message: "Forbidden behaviour for that user"
+    error404:
+      value:
+        status: 404
+        error: "Not Found"
+        message: "No object with that ID"
+    error409:
+      value:
+        status: 409
+        error: "Conflict"
+        message: "Conflict with the operation"
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: X-API-KEY #Custom headers in rails apps must have the X- prefix
+      in: header

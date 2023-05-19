@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def update
-  @user = User.find(params[:id])
+    @user = User.find(params[:id])
     respond_to do |format|
       if @user.update(usuario_params)
         format.html { redirect_to @user }
@@ -31,6 +31,40 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def timeline
+    @user = User.find(params[:id])
+    collected_issues = []
+
+    Issue.where(created_by: @user.full_name).each do |issue|
+      collected_issues << {
+        user_full_name: @user.full_name,
+        description: "has created",
+        issue_id: issue.id,
+        issue_title: issue.issue,
+        issue_attribute: "null",
+        at: issue.created_at
+      }
+    end
+
+
+    IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version|
+      if version.attribute_name != "updated_at" && version.attribute_name != "user_name"
+        collected_issues << {
+          user_full_name: @user.full_name,
+          description: "has updated",
+          issue_id: version.issue.id,
+          issue_title: version.issue.issue,
+          issue_attribute: version.attribute_name,
+          at: version.updated_at
+        }
+      end
+    end
+
+    sorted_issues = collected_issues.sort_by { |issue| issue[:at] }.reverse
+
+    render json: { timeline: sorted_issues }
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
