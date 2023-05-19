@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post 'issues/create_issues_bulk'
   post 'issues/bulk_insert', to: 'issues#create_issues_bulk'
 
+  post 'issues/', to: 'issues#create'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root 'issues#index'
