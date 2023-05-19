@@ -18,7 +18,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://44.211.169.125:8080
+  - url: http://54.172.198.240:8080
 tags:
   - name: issues
     description: Everything about your issues
@@ -491,6 +491,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimelineResponse'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
+
 
   /users/{id}/watched:
     get:
@@ -510,6 +547,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WatchedIssuesResponse'
+        '404':
+          description: 'Error: Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error404'
+        '401':
+          description: 'Error: Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error401'
+        '403':
+          description: 'Error: Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error403'
+        '409':
+          description: 'Conflict with the operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+              examples:
+                errorExample:
+                  $ref: '#/components/examples/error409'
 
 components:
   schemas:
@@ -668,6 +741,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IssueEvent'
+      example:
+        {
+          "timeline": [
+            {
+              "user_full_name": "John Doe",
+              "description": "has created",
+              "issue_id": 1,
+              "issue_title": "Bug fix for login issue",
+              "issue_attribute": "Status",
+              "at": "2022-01-15T10:30:00Z"
+            },
+            {
+              "user_full_name": "Jane Smith",
+              "description": "has updated",
+              "issue_id": 2,
+              "issue_title": "Bug fix for login issue",
+              "issue_attribute": "Assignee",
+              "at": "2022-01-16T14:45:00Z"
+            },
+            {
+              "user_full_name": "John Doe",
+              "description": "has created",
+              "issue_id": 5,
+              "issue_title": "Bug fix for login issue",
+              "issue_attribute": "Status",
+              "at": "2022-01-20T09:15:00Z"
+            }
+          ]
+        }
 
     WatchedIssue:
       type: object
@@ -684,6 +786,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WatchedIssue'
+      example:
+        {
+          "watched_issues": [
+            {
+              "issue_id": 1,
+              "issue_name": "Bug fix for login issue",
+            },
+            {
+              "issue_id": 2,
+              "issue_name": "Enhancement: Add dark mode",
+            },
+            {
+              "issue_id": 3,
+              "issue_name": "Refactor code for better performance",
+            }
+          ]
+        }
 
     UserUpdate:
       type: object
