@@ -474,6 +474,8 @@ paths:
 
   /users/{id}/timeline:
     get:
+      tags:
+      - user
       summary: Obtain the user associated to the id's timeline
       parameters:
         - name: id
@@ -489,6 +491,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimelineResponse'
+
+  /users/{id}/watched:
+    get:
+      tags:
+      - user
+      summary: Get watched issues by the user associated to the id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WatchedIssuesResponse'
 
 components:
   schemas:
@@ -647,6 +668,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IssueEvent'
+
+    WatchedIssue:
+      type: object
+      properties:
+        issue_id:
+          type: integer
+        issue_name:
+          type: string
+
+    WatchedIssuesResponse:
+      type: object
+      properties:
+        watched_issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/WatchedIssue'
 
     UserUpdate:
       type: object

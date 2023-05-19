@@ -35,7 +35,6 @@ class UsersController < ApplicationController
   def timeline
     @user = User.find(params[:id])
     collected_issues = []
-
     Issue.where(created_by: @user.full_name).each do |issue|
       collected_issues << {
         user_full_name: @user.full_name,
@@ -46,8 +45,6 @@ class UsersController < ApplicationController
         at: issue.created_at
       }
     end
-
-
     IssueVersion.where(user_full_name: @user.full_name).reverse_order.each do |version|
       if version.attribute_name != "updated_at" && version.attribute_name != "user_name"
         collected_issues << {
@@ -60,10 +57,24 @@ class UsersController < ApplicationController
         }
       end
     end
-
     sorted_issues = collected_issues.sort_by { |issue| issue[:at] }.reverse
+    render json: { timeline: sorted_issues.presence || 'No timeline available' }
+  end
 
-    render json: { timeline: sorted_issues }
+  def watched
+    @user = User.find(params[:id])
+    watched_issues = @user.watched_issues
+
+    watched_issues_data = watched_issues.map do |issue| {
+      issue_id: issue.id, issue_name: issue.issue
+    }
+    end
+
+    if watched_issues_data.present?
+      render json: { watched_issues: watched_issues_data }
+    else
+      render json: { message: 'No watched issues found.' }
+    end
   end
 
   private

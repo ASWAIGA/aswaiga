@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get 'timeline'
+      get 'watched', to: 'users#watched'
     end
   end
 
