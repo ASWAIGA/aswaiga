@@ -26,9 +26,6 @@
             <% end %>
     </div>
     <div id= "contenidor">
-
-
-
       <p>
       <div class= "left-filters">
         <%= form_tag issues_path, method: :get do %>
@@ -112,7 +109,7 @@ function myFunction() {
         <%= text_area_tag :issue_titles, @issue, class: "tg-input-search2", rows: 10, placeholder:"One item per line..." %>
         <%= submit_tag "SAVE", class: "btn btn-success9" %>
       <% end %>
-  </div>
+    </div>
 
     <thead>
       <tr>
@@ -134,15 +131,13 @@ function myFunction() {
         <td><%= link_to issue.issue, issue%> <img id="clockid-<%= issue.id %>" class="clock-icon" src="" alt="">
         <img id="blockid-<%= issue.id %>" class="clock-icon" src="" alt=""></td>
         <script>
-          if (<%= issue.due_date.present?.to_json %>) {
+          if (<%= issue.due_date.present? %>) {
             const dueDate = '<%= issue.due_date %>';
             const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
             const today = new Date();
             const dueDateObj = new Date(dueDate);
-
             const timeDiff = dueDateObj.getTime() - today.getTime();
             const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
             if (diffDays <= 0) {
               clock.src = "/img/Icon-clock-red.png";
             }
@@ -156,16 +151,16 @@ function myFunction() {
 
           if (<%= !issue.due_date.present?.to_json %>) {
             const clock = document.getElementById("clockid-" + <%= issue.id.to_s %>);
-            clock.src = "";
+            clock.src = " ";
           }
 
-          if (<%= issue.block_status %>) {
+          if (<%= issue.block_status.present? %>) {
             const block = document.getElementById("blockid-" + <%= issue.id.to_s %>);
             block.src = "/img/Icon-block-red.png";
           }
           if (<%= !issue.block_status %>) {
-            const clock = document.getElementById("blockid-" + <%= issue.id.to_s %>);
-            block.src = "";
+            const block = document.getElementById("blockid-" + <%= issue.id.to_s %>);
+            block.src = " ";
           }
         </script>
         <td><%= issue.status %></td>
@@ -179,10 +174,6 @@ function myFunction() {
     <% end %>
 
   </table>
-  <br>
-
-  <br>
-  <br>
 </div>
 
  <script>

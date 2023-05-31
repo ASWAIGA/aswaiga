@@ -84,7 +84,9 @@ class IssuesController < ApplicationController
   end
 
   def create_issues_bulk
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
@@ -107,6 +109,7 @@ class IssuesController < ApplicationController
   def create
     @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
@@ -142,7 +145,9 @@ class IssuesController < ApplicationController
 
   # PATCH/PUT /issues/1 or /issues/1.json
   def update
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
@@ -184,7 +189,9 @@ class IssuesController < ApplicationController
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
@@ -218,7 +225,9 @@ class IssuesController < ApplicationController
   end
 
   def add_watchers
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else

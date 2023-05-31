@@ -18,7 +18,9 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
