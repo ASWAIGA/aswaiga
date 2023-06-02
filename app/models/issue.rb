@@ -23,6 +23,7 @@ class Issue < ApplicationRecord
         new_value: self.send(attr),
         created_at_change: Time.current,
         user_full_name: self.user_name,
+        userid: self.created_by,
       ) if old_value != self.send(attr)
     end
 

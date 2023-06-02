@@ -24,7 +24,7 @@
     <h2>Timeline</h2>
 
   <% collected_issues = [] %>
-  <% Issue.where(created_by: @user.full_name).map do |issue| %>
+  <% Issue.where(created_by: @user.id).map do |issue| %>
     <% collected_issues << {
       issue: issue,
       id: issue.id,
