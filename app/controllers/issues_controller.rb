@@ -84,7 +84,9 @@ class IssuesController < ApplicationController
   end
 
   def create_issues_bulk
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else
@@ -105,20 +107,7 @@ class IssuesController < ApplicationController
 
   # POST /issues or /issues.json
   def create
-    @user = current_user
-    api_key = request.headers[:HTTP_X_API_KEY]
-    if api_key.nil?
-      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
-    else
-      @APIuser = User.find_by_api_key(api_key)
-      if @APIuser.nil?
-        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
-      else
-        @user = @APIuser
-      end
-    end
     @issue = Issue.new(issue_params)
-    @issue.created_by = @user.id
     respond_to do |format|
       if params[:block_clicked] == 'true'
         if @issue.update(block_status: true)
@@ -142,35 +131,7 @@ class IssuesController < ApplicationController
 
   # PATCH/PUT /issues/1 or /issues/1.json
   def update
-    api_key = request.headers[:HTTP_X_API_KEY]
-    if api_key.nil?
-      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
-    else
-      @APIuser = User.find_by_api_key(api_key)
-      if @APIuser.nil?
-        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
-      else
-        @user = @APIuser
-      end
-    end
-    respond_to do |format|
-      if params[:unblock_clicked] == 'true'
-        if @issue.update(reason_block: nil, block_status: false)
-          format.html { redirect_to issue_url(@issue), notice: "Issue unblocked." }
-          format.json { render :show, status: :ok, location: @issue }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @issue.errors, status: :unprocessable_entity }
-        end
-      elsif params[:block_clicked] == 'true'
-        if @issue.update(block_status: true, reason_block: params[:issue][:reason_block])
-          format.html { redirect_to issue_url(@issue), notice: "Issue blocked." }
-          format.json { render :show, status: :ok, location: @issue }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @issue.errors, status: :unprocessable_entity }
-        end
-      else
+      respond_to do |format|
         if @issue.update(issue_params)
           format.html { redirect_to issue_url(@issue), notice: "Issue was successfully updated." }
           format.json { render :show, status: :ok, location: @issue }
@@ -179,22 +140,12 @@ class IssuesController < ApplicationController
           format.json { render json: @issue.errors, status: :unprocessable_entity }
         end
       end
-    end
   end
+
+
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
-    api_key = request.headers[:HTTP_X_API_KEY]
-    if api_key.nil?
-      render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
-    else
-      @APIuser = User.find_by_api_key(api_key)
-      if @APIuser.nil?
-        render :json => { "status" => "401", "error" => "No User found with the Api key provided." }, status: :unauthorized and return
-      else
-        @user = @APIuser
-      end
-    end
     @issue = Issue.find(params[:id])
     @issue.issue_versions.destroy_all
     @issue.destroy
@@ -227,7 +178,9 @@ class IssuesController < ApplicationController
   end
 
   def add_watchers
+    @user = current_user
     api_key = request.headers[:HTTP_X_API_KEY]
+    api_key = @user.api_key
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
     else

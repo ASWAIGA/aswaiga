@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
     @user = current_user
+    api_key = @user.api_key
     api_key = request.headers[:HTTP_X_API_KEY]
     if api_key.nil?
       render :json => { "status" => "401", "error" => "No Api key provided." }, status: :unauthorized and return
